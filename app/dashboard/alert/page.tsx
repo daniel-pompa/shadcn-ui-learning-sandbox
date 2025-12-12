@@ -1,7 +1,7 @@
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Info, LaptopMinimalCheck, Terminal, TriangleAlert } from 'lucide-react';
 
-export default function AlertPage() {
+export default function AlertDemo() {
   return (
     <div className='grid gap-3'>
       <Alert>
