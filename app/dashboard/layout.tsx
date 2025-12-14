@@ -6,17 +6,10 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import {
-  Menu,
-  X,
-  Zap,
-  CirclePower,
-  ListChevronsUpDown,
-  Bell,
-  Settings,
-} from 'lucide-react';
+import { Menu, X, CirclePower, ListChevronsUpDown, Bell, Settings } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
+import { SiShadcnui } from 'react-icons/si';
 
 const links = [
   { name: 'accordion', href: 'accordion', icon: ListChevronsUpDown },
@@ -59,7 +52,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 )}
               </button>
               <Link href='/' className='text-xl font-bold flex items-center lg:ml-2.5'>
-                <Zap className='h-6 w-6 text-blue-600' />
+                <SiShadcnui className='h-6 w-6 text-blue-600' />
                 <span className='self-center whitespace-nowrap ml-2'>
                   Shadcn/ui Dashboard
                 </span>
