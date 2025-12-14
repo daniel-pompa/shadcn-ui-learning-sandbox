@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Zap } from 'lucide-react';
+import { Rocket } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
 export const CTASection = () => {
@@ -16,7 +16,7 @@ export const CTASection = () => {
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
             <Button asChild className='px-8'>
               <Link href='/'>
-                <Zap className='h-5 w-5' />
+                <Rocket className='h-5 w-5' />
                 Launch dashboard
               </Link>
             </Button>
