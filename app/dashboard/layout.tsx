@@ -169,7 +169,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               </div>
             </div>
           </main>
-          <footer className='bg-white md:flex md:items-center md:justify-between shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4'>
+          <footer className='bg-white flex flex-col md:flex-row justify-between items-center shadow rounded-lg p-4 md:p-6 xl:p-8 my-6 mx-4'>
             <ul className='flex items-center flex-wrap mb-6 md:mb-0'>
               <li>
                 <a
@@ -184,7 +184,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   href='#'
                   className='text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6'
                 >
-                  Privacy Policy
+                  Privacy policy
                 </a>
               </li>
               <li>
@@ -200,7 +200,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                   href='#'
                   className='text-sm font-normal text-gray-500 hover:underline mr-4 md:mr-6'
                 >
-                  Cookie Policy
+                  Cookie policy
                 </a>
               </li>
               <li>
@@ -219,7 +219,12 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <a href='#' className='text-gray-500 hover:text-gray-900'>
                 <FaXTwitter className='h-5 w-5' />
               </a>
-              <a href='#' className='text-gray-500 hover:text-gray-900'>
+              <a
+                href='https://github.com/daniel-pompa/shadcn-ui-learning-sandbox'
+                target='_blank'
+                rel='noopener noreferrer'
+                className='text-gray-500 hover:text-gray-900'
+              >
                 <FaGithub className='h-5 w-5' />
               </a>
               <a href='#' className='text-gray-500 hover:text-gray-900'>
