@@ -13,7 +13,6 @@ export interface Feature {
 export interface LearningModule {
   title: string;
   description: string;
-  icon: React.ReactNode;
   href: string;
   badge: string;
   color: string;

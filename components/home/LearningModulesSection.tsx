@@ -10,16 +10,12 @@ import {
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight } from 'lucide-react';
-import { FaPalette, FaTable } from 'react-icons/fa';
-import { SiFormspree } from 'react-icons/si';
-import { RiLayoutMasonryFill } from 'react-icons/ri';
 import type { LearningModule } from './types';
 
 const learningModules: LearningModule[] = [
   {
     title: 'Core components',
     description: 'Introduction to design philosophy and basic components of Shadcn/ui.',
-    icon: <RiLayoutMasonryFill className='h-8 w-8' />,
     href: '/',
     badge: 'Fundamentals',
     color: 'from-blue-500 to-cyan-500',
@@ -31,7 +27,6 @@ const learningModules: LearningModule[] = [
     title: 'Data visualization',
     description:
       'Advanced tables with TanStack Table, sorting, filtering, and pagination.',
-    icon: <FaTable className='h-8 w-8' />,
     href: '/',
     badge: 'Advanced',
     color: 'from-emerald-500 to-teal-500',
@@ -42,7 +37,6 @@ const learningModules: LearningModule[] = [
   {
     title: 'Forms and validation',
     description: 'Comprehensive form handling with React Hook Form and Zod schemas.',
-    icon: <SiFormspree className='h-8 w-8' />,
     href: '/',
     badge: 'Interactive',
     color: 'from-orange-500 to-amber-500',
@@ -53,7 +47,6 @@ const learningModules: LearningModule[] = [
   {
     title: 'Theming and dark mode',
     description: 'Global theming and dark mode implementation with Tailwind CSS.',
-    icon: <FaPalette className='h-8 w-8' />,
     href: '/',
     badge: 'Styling',
     color: 'from-indigo-500 to-violet-500',
@@ -95,9 +88,7 @@ export const LearningModulesSection = () => {
           >
             <CardHeader>
               <div className='flex items-start justify-between'>
-                <div className={`p-3 rounded-lg ${module.bgColor}`}>
-                  <div className={module.iconColor}>{module.icon}</div>
-                </div>
+                <div className={`p-3 rounded-lg ${module.bgColor}`}></div>
                 <Badge className={getBadgeColor(module.bgColor)}>{module.badge}</Badge>
               </div>
               <CardTitle className='mt-4'>{module.title}</CardTitle>
