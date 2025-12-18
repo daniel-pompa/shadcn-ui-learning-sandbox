@@ -16,6 +16,7 @@ const links = [
   { name: 'alert', href: 'alert', icon: Bell },
   { name: 'button', href: 'button', icon: CirclePower },
   { name: 'alert dialog', href: 'alert-dialog', icon: Bell },
+  { name: 'dialog', href: 'dialog', icon: Settings },
 ];
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
