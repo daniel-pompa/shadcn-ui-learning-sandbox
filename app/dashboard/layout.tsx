@@ -6,18 +6,29 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar';
-import { Menu, X, CirclePower, ListChevronsUpDown, Bell, Settings } from 'lucide-react';
+import {
+  Menu,
+  X,
+  CirclePower,
+  ListChevronsUpDown,
+  Settings,
+  BadgeInfo,
+  MessageSquare,
+  TriangleAlert,
+  MessageSquareWarning,
+} from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { SiShadcnui } from 'react-icons/si';
 
 const links = [
   { name: 'accordion', href: 'accordion', icon: ListChevronsUpDown },
-  { name: 'alert', href: 'alert', icon: Bell },
+  { name: 'alert', href: 'alert', icon: TriangleAlert },
   { name: 'button', href: 'button', icon: CirclePower },
-  { name: 'alert dialog', href: 'alert-dialog', icon: Bell },
-  { name: 'dialog', href: 'dialog', icon: Settings },
-];
+  { name: 'alert dialog', href: 'alert-dialog', icon: MessageSquareWarning },
+  { name: 'dialog', href: 'dialog', icon: MessageSquare },
+  { name: 'badge', href: 'badge', icon: BadgeInfo },
+].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
