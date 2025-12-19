@@ -118,7 +118,33 @@ cd shadcn-ui-learning-sandbox
 npm install
 ```
 
-4. **Run the development server:**
+4. **Environment Setup:**
+
+Create your environment configuration file:
+
+```bash
+# Copy the environment template
+cp .env.template .env.local
+
+# On Windows (CMD):
+# copy .env.template .env.local
+```
+
+The `.env.local` file contains:
+
+- Sandbox URLs for online code editors (StackBlitz, CodeSandbox, GitHub.dev)
+
+- Fallback URLs in case environment variables are not set
+
+**Important notes:**
+
+The `.env.local` file is ignored by Git (see .gitignore)
+
+Never commit your `.env.local` file to the repository
+
+The `.env.template` file is the template that should remain in the repository
+
+5. **Run the development server:**
 
 ```bash
 npm run dev
