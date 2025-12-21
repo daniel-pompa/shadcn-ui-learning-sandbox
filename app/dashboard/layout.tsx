@@ -30,6 +30,7 @@ const links = [
   { name: 'dialog', href: 'dialog', icon: MessageSquare },
   { name: 'badge', href: 'badge', icon: BadgeInfo },
   { name: 'calendar', href: 'calendar', icon: CalendarDays },
+  { name: 'card', href: 'card', icon: Settings },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
