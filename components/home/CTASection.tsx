@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Rocket } from 'lucide-react';
+import { LayoutGrid } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa';
 
 export const CTASection = () => {
@@ -14,12 +14,15 @@ export const CTASection = () => {
             practical environment.
           </p>
           <div className='flex flex-col sm:flex-row gap-4 justify-center'>
-            <Button asChild className='px-8'>
-              <Link href='/'>
-                <Rocket className='h-5 w-5' />
-                Launch dashboard
+            {/* Primary CTA: Component gallery */}
+            <Button asChild className='gap-2'>
+              <Link href='/dashboard/overview'>
+                <LayoutGrid className='h-5 w-5' />
+                Enter component gallery
               </Link>
             </Button>
+
+            {/* Secondary CTA: View on GitHub */}
             <Button asChild variant='outline' className='px-8'>
               <Link
                 href='https://github.com/daniel-pompa/shadcn-ui-learning-sandbox'
@@ -32,9 +35,9 @@ export const CTASection = () => {
             </Button>
           </div>
           <div className='mt-8 pt-8 border-t'>
-            <p className='text-sm text-muted-foreground'>
+            <p className='text-xs sm:text-sm text-muted-foreground'>
               Quick start with npm:
-              <code className='block mt-2 p-3 bg-muted rounded-lg font-mono text-sm'>
+              <code className='text-xs sm:text-sm block mt-2 p-3 bg-muted rounded-lg font-mono'>
                 npx shadcn-ui@latest add [component-name]
               </code>
             </p>

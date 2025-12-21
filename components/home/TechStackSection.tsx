@@ -1,43 +1,51 @@
 import { FaReact } from 'react-icons/fa';
 import { SiNextdotjs, SiRadixui, SiTypescript } from 'react-icons/si';
 import { RiTailwindCssFill } from 'react-icons/ri';
-import type { TechItem } from './types';
 
-const techStack: TechItem[] = [
+const techStack = [
   {
     name: 'Next.js',
-    icon: <SiNextdotjs className='h-8 w-8' />,
-    color: 'text-slate-900',
+    icon: <SiNextdotjs className='h-7 w-7' />,
+    color: 'hover:text-black',
   },
-  { name: 'React', icon: <FaReact className='h-8 w-8' />, color: 'text-blue-500' },
+  { name: 'React', icon: <FaReact className='h-7 w-7' />, color: 'hover:text-blue-500' },
   {
     name: 'TypeScript',
-    icon: <SiTypescript className='h-8 w-8' />,
-    color: 'text-blue-600',
+    icon: <SiTypescript className='h-7 w-7' />,
+    color: 'hover:text-blue-600',
   },
   {
-    name: 'Tailwind CSS',
-    icon: <RiTailwindCssFill className='h-8 w-8' />,
-    color: 'text-cyan-500',
+    name: 'Tailwind',
+    icon: <RiTailwindCssFill className='h-7 w-7' />,
+    color: 'hover:text-cyan-500',
   },
   {
     name: 'Radix UI',
-    icon: <SiRadixui className='h-8 w-8' />,
-    color: 'text-slate-900',
+    icon: <SiRadixui className='h-7 w-7' />,
+    color: 'hover:text-slate-900',
   },
 ];
 
 export const TechStackSection = () => {
   return (
-    <section className='py-12'>
-      <h2 className='text-2xl font-bold mb-8'>Built with modern web technologies</h2>
-      <div className='flex flex-wrap -ml-3 gap-2'>
-        {techStack.map((tech, index) => (
-          <div key={index} className='flex flex-col items-center gap-2 w-20'>
-            <div className={`p-3 rounded-md border ${tech.color}`}>{tech.icon}</div>
-            <span className='text-sm font-medium'>{tech.name}</span>
-          </div>
-        ))}
+    <section className='py-16 border-y border-muted/50 bg-muted/5 rounded-3xl'>
+      <div className='flex flex-col lg:flex-row items-center-safe gap-10'>
+        <h2 className='font-bold tracking-widest text-muted-foreground/60 text-center'>
+          Engineered with the modern web stack
+        </h2>
+        <div className='flex flex-wrap justify-center gap-8 md:gap-14'>
+          {techStack.map((tech, index) => (
+            <div
+              key={index}
+              className='flex items-center gap-3 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all cursor-default group'
+            >
+              <div className={`${tech.color} transition-transform group-hover:scale-110`}>
+                {tech.icon}
+              </div>
+              <span className='font-bold tracking-tight'>{tech.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
