@@ -20,7 +20,7 @@ export const HeroSection = () => {
         </div>
 
         {/* Main heading */}
-        <h1 className='text-4xl font-bold tracking-tight md:text-5xl'>
+        <h1 className='text-3xl lg:text-4xl font-bold tracking-tight'>
           Master{' '}
           <span className='bg-linear-to-r from-primary to-blue-600 bg-clip-text text-transparent'>
             shadcn/ui
@@ -29,11 +29,11 @@ export const HeroSection = () => {
         </h1>
 
         {/* Description */}
-        <p className='text-lg text-muted-foreground'>
-          The ultimate playground for modern UI developers. Explore, implement, and
-          customize high-end components from the Shadcn/ui library in a production-ready
-          environment without the friction of local setup. Learn by doing with real
-          examples and best practices.
+        <p className='lg:text-lg text-muted-foreground'>
+          Accelerate your mastery of modern web development with a production-ready
+          showcase of shadcn/ui components. We bridge the gap between static documentation
+          and real-world implementation, providing interactive, zero-config sandboxes to
+          explore and build with confidence
         </p>
 
         {/* CTA Buttons */}
