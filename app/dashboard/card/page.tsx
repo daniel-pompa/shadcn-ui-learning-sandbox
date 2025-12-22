@@ -54,7 +54,7 @@ export default function CardDemo() {
       id: 1,
       title: 'Notifications',
       description: 'Manage your notifications and alerts',
-      icon: <Bell className='h-6 w-6 text-blue-500' />,
+      icon: <Bell className='h-6 w-6' />,
       content:
         'You have 3 unread notifications. Customize how you receive alerts for your projects.',
       footerText: 'Last updated 2 hours ago',
@@ -68,7 +68,7 @@ export default function CardDemo() {
       id: 2,
       title: 'Calendar',
       description: 'Upcoming events and schedule',
-      icon: <Calendar className='h-6 w-6 text-green-500' />,
+      icon: <Calendar className='h-6 w-6' />,
       content:
         'Next meeting: Project Review at 3:00 PM today. Sync your calendar across devices.',
       footerText: '2 events today',
@@ -82,7 +82,7 @@ export default function CardDemo() {
       id: 3,
       title: 'Documentation',
       description: 'Access project documentation',
-      icon: <FileText className='h-6 w-6 text-purple-500' />,
+      icon: <FileText className='h-6 w-6' />,
       content:
         'Complete guide to shadcn/ui components. Learn how to build modern interfaces quickly.',
       footerText: 'Updated recently',
@@ -128,7 +128,7 @@ export default function CardDemo() {
       id: 6,
       title: 'Task manager',
       description: 'Track your tasks and progress',
-      icon: <CheckCircle className='h-6 w-6 text-red-500' />,
+      icon: <CheckCircle className='h-6 w-6 text-emerald-500' />,
       content: 'You have completed 12 out of 15 tasks this week. Great progress!',
       footerText: '3 tasks remaining',
       actions: [
@@ -145,14 +145,6 @@ export default function CardDemo() {
 
   return (
     <>
-      <div className='mb-8'>
-        <h1 className='text-3xl font-bold tracking-tight'>Card Components</h1>
-        <p className='text-gray-500 mt-2'>
-          Explore the versatile card components from shadcn/ui. Each card demuestra
-          different layouts and use cases.
-        </p>
-      </div>
-
       <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6'>
         {demoCards.map(card => (
           <Card
@@ -168,7 +160,6 @@ export default function CardDemo() {
                     <CardDescription className='mt-1'>{card.description}</CardDescription>
                   </div>
                 </div>
-                {/* Ajuste realizado: Usamos el componente Badge con su variante correspondiente */}
                 {card.badge && (
                   <Badge variant={card.badge.variant}>{card.badge.text}</Badge>
                 )}
