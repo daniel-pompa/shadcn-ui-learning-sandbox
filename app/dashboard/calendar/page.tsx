@@ -58,12 +58,14 @@ export default function CalendarDemo() {
   };
 
   return (
-    <div className='space-y-8 p-4'>
+    <div className='space-y-8'>
       {/* Page header */}
       <div className='space-y-2'>
-        <h1 className='text-2xl font-bold tracking-tight'>Advanced Calendar Selection</h1>
-        <p className='text-gray-500'>
-          Each calendar maintains its own date selection with specific rules and modes
+        <h1 className='text-3xl lg:text-4xl font-bold tracking-tight'>
+          Advanced calendar selection
+        </h1>
+        <p className='lg:text-lg text-muted-foreground'>
+          Each calendar maintains its own date selection with specific rules and modes.
         </p>
       </div>
 
