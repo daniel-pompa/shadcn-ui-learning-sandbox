@@ -83,7 +83,7 @@ export const LearningModulesSection = () => {
   return (
     <section className='py-12'>
       <div className='mb-12'>
-        <h2 className='text-2xl font-bold mb-4 italic'>Structured learning path</h2>
+        <h2 className='text-2xl font-bold mb-4'>Structured learning path</h2>
         <p className='text-muted-foreground'>
           Follow these modules to systematically master Shadcn/ui from basics to advanced
           topics
