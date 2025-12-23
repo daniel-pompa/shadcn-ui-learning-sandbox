@@ -16,6 +16,7 @@ import {
   CalendarDays,
   PanelTop,
   GalleryVertical,
+  SquareCheck,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -32,6 +33,7 @@ const links = [
   { name: 'calendar', href: 'calendar', icon: CalendarDays },
   { name: 'card', href: 'card', icon: PanelTop },
   { name: 'carousel', href: 'carousel', icon: GalleryVertical },
+  { name: 'checkbox', href: 'checkbox', icon: SquareCheck },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
