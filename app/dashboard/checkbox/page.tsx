@@ -1,14 +1,37 @@
 'use client';
 
+import { useState } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 export default function CheckboxDemo() {
+  const [checked, setChecked] = useState(false);
+
   return (
     <div className='flex flex-col gap-6 max-w-xl'>
-      <div className='flex items-center gap-3'>
-        <Checkbox id='terms' />
-        <Label htmlFor='terms'>Accept terms and conditions</Label>
+      <div className='flex items-center gap-4'>
+        <div className='flex items-center space-x-2'>
+          <Checkbox
+            id='terms'
+            checked={checked}
+            onCheckedChange={value => setChecked(!!value)}
+          />
+          <Label htmlFor='terms'>Accept terms and conditions</Label>
+        </div>
+
+        <Badge
+          variant='outline'
+          className={cn(
+            'transition-all duration-300 border shadow-sm px-2.5 py-0.5',
+            checked
+              ? 'bg-emerald-50 text-emerald-500 border-emerald-200 hover:bg-emerald-100 hover:text-green-500'
+              : 'bg-amber-50 text-amber-500 border-amber-200 hover:bg-amber-100 hover:text-amber-500'
+          )}
+        >
+          {checked ? <span>Great!</span> : <span>You must accept</span>}
+        </Badge>
       </div>
       <div className='flex items-start gap-3'>
         <Checkbox id='terms-2' defaultChecked />
