@@ -97,14 +97,14 @@ export const TabForms = ({
         {/* Global settings */}
         <Card className='shadow-sm pt-0'>
           <CardHeader className='border-b bg-muted/30 pt-6'>
-            <CardTitle className='text-base font-bold'>Global settings</CardTitle>
+            <CardTitle className='text-base'>Global settings</CardTitle>
             <CardDescription>Configure your workspace behavior</CardDescription>
           </CardHeader>
           <CardContent className='p-6 space-y-6'>
             <div className='flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors'>
               <div className='space-y-0.5'>
-                <Label className='text-sm font-bold'>Notifications</Label>
-                <p className='text-[11px] text-muted-foreground'>
+                <Label className='text-sm'>Notifications</Label>
+                <p className='text-sm text-muted-foreground'>
                   Receive daily email summaries
                 </p>
               </div>
@@ -115,8 +115,8 @@ export const TabForms = ({
             </div>
             <div className='flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors'>
               <div className='space-y-0.5'>
-                <Label className='text-sm font-bold'>Auto-save</Label>
-                <p className='text-[11px] text-muted-foreground'>
+                <Label className='text-sm'>Auto-save</Label>
+                <p className='text-sm text-muted-foreground'>
                   Save changes every 5 minutes
                 </p>
               </div>
@@ -129,8 +129,8 @@ export const TabForms = ({
             </div>
             <div className='flex items-center justify-between p-2 rounded-lg hover:bg-muted/50 transition-colors'>
               <div className='space-y-0.5'>
-                <Label className='text-sm font-bold'>Analytics</Label>
-                <p className='text-[11px] text-muted-foreground'>
+                <Label className='text-sm'>Analytics</Label>
+                <p className='text-sm text-muted-foreground'>
                   Share anonymous usage data
                 </p>
               </div>
@@ -141,8 +141,8 @@ export const TabForms = ({
               />
             </div>
             <div className='space-y-3 pt-2'>
-              <div className='flex justify-between text-xs font-bold'>
-                <Label className='text-xs'>Profile completion</Label>
+              <div className='flex justify-between text-sm'>
+                <Label>Profile completion</Label>
                 <span>{progress}%</span>
               </div>
               <Progress value={progress} className='h-2 bg-muted' />
@@ -152,7 +152,7 @@ export const TabForms = ({
                     key={v}
                     variant='outline'
                     size='sm'
-                    className='flex-1 h-8 text-[10px] font-bold'
+                    className='flex-1 h-8 text-[10px]'
                     onClick={() => handleProgressUpdate(v)}
                   >
                     {v}%
@@ -166,12 +166,12 @@ export const TabForms = ({
         {/* Direct message */}
         <Card className='shadow-sm pt-0'>
           <CardHeader className='border-b bg-muted/30 pt-6'>
-            <CardTitle className='text-base font-bold'>Direct message</CardTitle>
+            <CardTitle className='text-base'>Direct message</CardTitle>
             <CardDescription>Send a message to the support team</CardDescription>
           </CardHeader>
           <CardContent className='p-6 space-y-4'>
             <div className='space-y-2'>
-              <Label htmlFor='name' className='text-xs font-bold'>
+              <Label htmlFor='name' className='text-sm'>
                 Subject
               </Label>
               <Input
@@ -181,7 +181,7 @@ export const TabForms = ({
               />
             </div>
             <div className='space-y-2'>
-              <Label htmlFor='category' className='text-xs font-bold'>
+              <Label htmlFor='category' className='text-sm'>
                 Inquiry type
               </Label>
               <Select>
@@ -196,7 +196,7 @@ export const TabForms = ({
               </Select>
             </div>
             <div className='space-y-2'>
-              <Label htmlFor='msg' className='text-xs font-bold'>
+              <Label htmlFor='msg' className='text-sm'>
                 Message body
               </Label>
               <Textarea
@@ -216,7 +216,7 @@ export const TabForms = ({
             </div>
           </CardContent>
           <CardFooter className='p-6 pt-0'>
-            <Button className='w-full font-bold h-10' onClick={handleSendMessage}>
+            <Button className='w-full h-10' onClick={handleSendMessage}>
               Send message
             </Button>
           </CardFooter>
@@ -225,13 +225,13 @@ export const TabForms = ({
         {/* Security and access */}
         <Card className='shadow-sm pt-0'>
           <CardHeader className='border-b bg-muted/30 pt-6'>
-            <CardTitle className='text-base font-bold'>Security and access</CardTitle>
+            <CardTitle className='text-base'>Security and access</CardTitle>
             <CardDescription>Manage your account credentials</CardDescription>
           </CardHeader>
           <CardContent className='p-6 space-y-6'>
             <div className='space-y-4'>
               <div className='space-y-2'>
-                <Label htmlFor='curr-pass' className='text-xs font-bold'>
+                <Label htmlFor='curr-pass' className='text-sm'>
                   Current password
                 </Label>
                 <Input
@@ -242,7 +242,7 @@ export const TabForms = ({
                 />
               </div>
               <div className='space-y-2'>
-                <Label htmlFor='new-pass' className='text-xs font-bold'>
+                <Label htmlFor='new-pass' className='text-sm'>
                   New password
                 </Label>
                 <Input
@@ -256,16 +256,13 @@ export const TabForms = ({
               <div className='flex gap-2'>
                 <Button
                   variant='outline'
-                  className='flex-1 text-[11px] font-bold gap-2'
+                  className='flex-1 text-sm gap-2'
                   onClick={handleResetForm}
                 >
                   <RotateCcw className='h-3 w-3' />
                   Reset
                 </Button>
-                <Button
-                  className='flex-1 text-[11px] font-bold gap-2'
-                  onClick={handlePasswordUpdate}
-                >
+                <Button className='flex-1 text-sm gap-2' onClick={handlePasswordUpdate}>
                   <KeyRound className='h-3 w-3' />
                   Update password
                 </Button>
@@ -275,7 +272,7 @@ export const TabForms = ({
             <Separator />
 
             <div className='space-y-3'>
-              <Label className='text-xs font-bold text-muted-foreground uppercase tracking-wider'>
+              <Label className='text-xs text-muted-foreground uppercase tracking-wider'>
                 Two-factor authentication
               </Label>
               <RadioGroup
@@ -306,15 +303,14 @@ export const TabForms = ({
 
             <div className='flex items-center justify-between pt-4 border-t'>
               <div className='space-y-0.5'>
-                <Label className='text-sm font-bold text-destructive'>Danger zone</Label>
-                <p className='text-[10px] text-muted-foreground'>
+                <Label className='text-sm text-destructive'>Danger zone</Label>
+                <p className='text-xs text-muted-foreground'>
                   Log out from all active devices
                 </p>
               </div>
               <Button
                 variant='destructive'
                 size='sm'
-                className='font-bold'
                 onClick={() => toast.error('Sessions terminated')}
               >
                 Terminate
