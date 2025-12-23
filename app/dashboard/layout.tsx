@@ -14,6 +14,7 @@ import {
   TriangleAlert,
   MessageSquareWarning,
   CalendarDays,
+  PanelTop,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -28,8 +29,7 @@ const links = [
   { name: 'dialog', href: 'dialog', icon: MessageSquare },
   { name: 'badge', href: 'badge', icon: BadgeInfo },
   { name: 'calendar', href: 'calendar', icon: CalendarDays },
-  { name: 'card', href: 'card', icon: Settings },
-  { name: 'overview', href: 'overview', icon: Settings }, // Añadido overview a la lista si no estaba
+  { name: 'card', href: 'card', icon: PanelTop },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
