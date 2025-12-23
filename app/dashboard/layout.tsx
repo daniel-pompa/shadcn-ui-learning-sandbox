@@ -15,6 +15,7 @@ import {
   MessageSquareWarning,
   CalendarDays,
   PanelTop,
+  GalleryVertical,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -30,6 +31,7 @@ const links = [
   { name: 'badge', href: 'badge', icon: BadgeInfo },
   { name: 'calendar', href: 'calendar', icon: CalendarDays },
   { name: 'card', href: 'card', icon: PanelTop },
+  { name: 'carousel', href: 'carousel', icon: GalleryVertical },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -99,9 +101,9 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                         <Link
                           href={`/dashboard/${link.href}`}
                           onClick={closeSidebar}
-                          className='text-base capitalize text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group transition-colors'
+                          className='text-base capitalize text-gray-500 hover:text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group transition-colors'
                         >
-                          <Icon className='w-5 h-5 mr-3 text-gray-500 group-hover:text-blue-600 transition-colors' />
+                          <Icon className='w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-900 transition-colors' />
                           <span>{link.name}</span>
                         </Link>
                       </li>
@@ -146,7 +148,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           className='h-full w-full bg-gray-50 relative overflow-y-auto lg:ml-64 flex-1 flex flex-col'
         >
           <main className='flex-1'>
-            <div className='pt-6 px-4 mt-4'>
+            <div className='px-4 mt-4'>
               <div className='w-full min-h-[calc(100vh-230px)]'>
                 {/* Breadcrumb */}
                 <div className='bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8'>
