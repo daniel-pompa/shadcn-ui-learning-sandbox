@@ -12,8 +12,7 @@ import {
 } from '@/components/ui/carousel';
 import { Separator } from '@/components/ui/separator';
 
-export default function CarouselPage() {
-  // Logic for Example 1 (API Control)
+export default function CarouselDemo() {
   const [api, setApi] = React.useState<CarouselApi>();
   const [current, setCurrent] = React.useState(0);
   const [count, setCount] = React.useState(0);
@@ -29,7 +28,7 @@ export default function CarouselPage() {
 
   return (
     <div className='space-y-12'>
-      {/* Header section */}
+      {/* Header */}
       <div className='space-y-2'>
         <h1 className='text-3xl lg:text-4xl font-bold tracking-tight'>
           Carousel variants
@@ -44,7 +43,7 @@ export default function CarouselPage() {
 
       {/* Grid container for all carousels */}
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 lg:gap-8 items-start justify-items-center'>
-        {/* 1. API & State Control Example */}
+        {/* API and state control example */}
         <div className='flex flex-col items-center space-y-4 w-full max-w-xs'>
           <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
             Status control
@@ -78,7 +77,7 @@ export default function CarouselPage() {
           </div>
         </div>
 
-        {/* 2. Vertical Orientation Example */}
+        {/* Vertical orientation example */}
         <div className='flex flex-col items-center space-y-4 w-full max-w-xs'>
           <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
             Vertical orientation
@@ -110,7 +109,7 @@ export default function CarouselPage() {
           </div>
         </div>
 
-        {/* 3. Custom size example */}
+        {/* Custom size example */}
         <div className='flex flex-col items-center space-y-4 w-full max-w-xs md:max-w-sm'>
           <h3 className='text-sm font-medium text-muted-foreground uppercase tracking-wider'>
             Responsive sizing
