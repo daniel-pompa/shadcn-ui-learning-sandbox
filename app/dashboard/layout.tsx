@@ -40,6 +40,7 @@ const links = [
   { name: 'command', href: 'command', icon: Command },
   { name: 'combobox', href: 'combobox', icon: Settings2 },
   { name: 'context menu', href: 'context-menu', icon: TextAlignJustify },
+  { name: 'menu bar', href: 'menu-bar', icon: Menu },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
