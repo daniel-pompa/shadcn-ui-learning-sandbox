@@ -255,7 +255,12 @@ export const SystemArchitect = () => {
               {/* Security progress */}
               <div className='space-y-4'>
                 <div className='flex justify-between items-center text-xs'>
-                  <span className='flex items-center gap-2 text-slate-500 font-bold uppercase tracking-tight'>
+                  <span
+                    className={cn(
+                      'flex items-center gap-2 font-bold uppercase tracking-tight',
+                      state.auth ? 'text-emerald-500' : 'text-slate-500'
+                    )}
+                  >
                     <ShieldCheck
                       className={cn(
                         'h-4 w-4',
@@ -282,7 +287,12 @@ export const SystemArchitect = () => {
               {/* Latency progress */}
               <div className='space-y-4'>
                 <div className='flex justify-between items-center text-xs'>
-                  <span className='flex items-center gap-2 text-slate-500 font-bold uppercase tracking-tight'>
+                  <span
+                    className={cn(
+                      'flex items-center gap-2 font-bold uppercase tracking-tight',
+                      state.infra ? 'text-blue-500' : 'text-slate-500'
+                    )}
+                  >
                     <Globe
                       className={cn(
                         'h-4 w-4',

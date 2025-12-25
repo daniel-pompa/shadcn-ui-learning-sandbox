@@ -1,5 +1,5 @@
 import { SystemArchitect } from '@/components/system-architect/SystemArchitect';
 
-export default function ArchitectPage() {
+export default function ComboboxDemo() {
   return <SystemArchitect />;
 }

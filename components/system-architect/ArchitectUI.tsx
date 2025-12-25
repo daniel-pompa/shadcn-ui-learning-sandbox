@@ -113,7 +113,7 @@ export function BlueprintRow({
       </span>
       <div
         className={cn(
-          'text-xs font-mono transition-all',
+          'text-xs transition-all',
           isSet ? 'font-bold text-slate-900' : 'text-slate-300'
         )}
       >
