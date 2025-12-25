@@ -19,6 +19,7 @@ import {
   SquareCheck,
   Command,
   Settings2,
+  TextAlignJustify,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -38,6 +39,7 @@ const links = [
   { name: 'checkbox', href: 'checkbox', icon: SquareCheck },
   { name: 'command', href: 'command', icon: Command },
   { name: 'combobox', href: 'combobox', icon: Settings2 },
+  { name: 'context menu', href: 'context-menu', icon: TextAlignJustify },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
