@@ -21,6 +21,7 @@ import {
   Settings2,
   TextAlignJustify,
   RectangleEllipsis,
+  Loader,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -43,6 +44,7 @@ const links = [
   { name: 'context menu', href: 'context-menu', icon: TextAlignJustify },
   { name: 'menu bar', href: 'menu-bar', icon: Menu },
   { name: 'input OTP', href: 'input-otp', icon: RectangleEllipsis },
+  { name: 'progress', href: 'progress', icon: Loader },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
