@@ -24,6 +24,7 @@ import {
   Loader,
   PanelRightClose,
   Ghost,
+  SlidersHorizontal,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -49,6 +50,7 @@ const links = [
   { name: 'progress', href: 'progress', icon: Loader },
   { name: 'sheet', href: 'sheet', icon: PanelRightClose },
   { name: 'skeleton', href: 'skeleton', icon: Ghost },
+  { name: 'slider', href: 'slider', icon: SlidersHorizontal },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
