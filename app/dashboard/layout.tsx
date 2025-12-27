@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import {
   Menu,
@@ -33,6 +35,7 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { SiShadcnui } from 'react-icons/si';
 import { DynamicBreadcrumb } from '@/components/breadcrumb/DynamicBreadcrumb';
 
+// Navigation links definition
 const links = [
   { name: 'accordion', href: 'accordion', icon: ListChevronsUpDown },
   { name: 'alert', href: 'alert', icon: TriangleAlert },
@@ -60,6 +63,9 @@ const links = [
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarBackdropVisible, setSidebarBackdropVisible] = useState(false);
+
+  // Hook to get the current URL path
+  const pathname = usePathname();
 
   const toggleSidebar = () => {
     const newState = !sidebarOpen;
@@ -106,9 +112,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Sidebar */}
         <aside
           id='sidebar'
-          className={`fixed z-20 h-screen top-0 left-0 pt-16 lg:flex lg:shrink-0 flex-col w-64 transition-transform duration-300 ease-in-out ${
+          className={cn(
+            'fixed z-20 h-screen top-0 left-0 pt-16 lg:flex lg:shrink-0 flex-col w-64 transition-transform duration-300 ease-in-out',
             sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-          }`}
+          )}
         >
           <div className='relative flex flex-col h-full min-h-0 border-r border-gray-200 bg-white'>
             <div className='flex-1 flex flex-col pt-5 pb-4 overflow-y-auto'>
@@ -119,15 +126,47 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                 <ul className='space-y-2'>
                   {links.map(link => {
                     const Icon = link.icon;
+                    const fullPath = `/dashboard/${link.href}`;
+                    // Active state detection logic
+                    const isActive = pathname === fullPath;
+
                     return (
                       <li key={link.href}>
                         <Link
-                          href={`/dashboard/${link.href}`}
+                          href={fullPath}
                           onClick={closeSidebar}
-                          className='text-base capitalize text-gray-500 hover:text-gray-900 font-normal rounded-lg flex items-center p-2 hover:bg-gray-100 group transition-colors'
+                          aria-current={isActive ? 'page' : undefined}
+                          className={cn(
+                            // Base styles:
+                            'group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 ease-in-out',
+                            isActive
+                              ? 'bg-gray-100 text-gray-900'
+                              : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100'
+                          )}
                         >
-                          <Icon className='w-5 h-5 mr-3 text-gray-500 group-hover:text-gray-900 transition-colors' />
-                          <span>{link.name}</span>
+                          <Icon
+                            className={cn(
+                              'shrink-0 w-5 h-5 mr-3 transition-colors duration-200',
+                              isActive
+                                ? 'text-gray-900'
+                                : 'text-gray-400 group-hover:text-gray-600'
+                            )}
+                            // Lucide stroke width for a cleaner, modern look
+                            strokeWidth={isActive ? 2.5 : 2}
+                          />
+                          <span
+                            className={cn(
+                              'truncate capitalize',
+                              isActive ? 'font-semibold' : 'font-medium'
+                            )}
+                          >
+                            {link.name}
+                          </span>
+
+                          {/* Indicator pill */}
+                          {isActive && (
+                            <span className='ml-auto w-1 h-4 bg-gray-900 rounded-full' />
+                          )}
                         </Link>
                       </li>
                     );
@@ -173,10 +212,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           <main className='flex-1'>
             <div className='px-4 mt-4'>
               <div className='w-full min-h-[calc(100vh-230px)]'>
-                {/* Breadcrumb */}
+                {/* Breadcrumb Container */}
                 <div className='bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8'>
                   <DynamicBreadcrumb />
-                  <div>{children}</div>
+                  <div className='mt-4'>{children}</div>
                 </div>
               </div>
             </div>
@@ -224,6 +263,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
               <a
                 href='https://github.com/daniel-pompa/shadcn-ui-learning-sandbox'
                 target='_blank'
+                rel='noopener noreferrer'
                 className='text-gray-500 hover:text-gray-900'
               >
                 <FaGithub className='h-5 w-5' />
