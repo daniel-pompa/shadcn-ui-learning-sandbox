@@ -210,16 +210,16 @@ export const TabComponents = () => {
               <CardContent className='flex flex-wrap gap-2'>
                 <Badge
                   variant='outline'
-                  className='border-emerald-500 text-emerald-600 bg-emerald-50/30'
+                  className='border-none text-emerald-600 bg-emerald-50 hover:bg-emerald-100 hover:text-emerald-700'
                 >
                   Api: online
                 </Badge>
-                <Badge variant='outline' className='bg-muted/30'>
+                <Badge variant='outline' className='border-none bg-muted'>
                   Db: connected
                 </Badge>
                 <Badge
                   variant='outline'
-                  className='border-amber-500 text-amber-600 bg-amber-50/30'
+                  className='border-none text-amber-600 bg-amber-50 hover:bg-amber-100 hover:text-amber-700'
                 >
                   Auth: maintenance
                 </Badge>
