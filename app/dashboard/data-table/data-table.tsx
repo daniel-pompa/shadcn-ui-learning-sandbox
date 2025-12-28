@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import {
   ColumnDef,
+  ColumnFiltersState,
+  SortingState,
   flexRender,
   getCoreRowModel,
-  useReactTable,
+  getFilteredRowModel,
   getPaginationRowModel,
-  SortingState,
   getSortedRowModel,
+  useReactTable,
 } from '@tanstack/react-table';
 
 import {
@@ -19,7 +21,18 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -31,6 +44,8 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [currentStatus, setCurrentStatus] = useState('all');
 
   const table = useReactTable({
     data,
@@ -39,15 +54,56 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     state: {
       sorting,
+      columnFilters,
     },
   });
 
   return (
     <div className='w-full space-y-4'>
-      {/* Table Container with refined borders and shadows */}
-      <div className='rounded-xl border bg-card shadow-sm overflow-hidden'>
+      <div className='flex items-center justify-between'>
+        <Input
+          placeholder='Filter emails...'
+          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+          onChange={event => {
+            setCurrentStatus('all');
+            table.getColumn('status')?.setFilterValue(undefined);
+            table.getColumn('email')?.setFilterValue(event.target.value);
+          }}
+          className='max-w-sm'
+        />
+        <Select
+          value={currentStatus}
+          onValueChange={value => {
+            if (value === 'all') {
+              table.getColumn('status')?.setFilterValue(undefined);
+              setCurrentStatus('all');
+              return;
+            }
+            setCurrentStatus(value);
+            table.getColumn('status')?.setFilterValue(value);
+          }}
+        >
+          <SelectTrigger className='w-45'>
+            <SelectValue placeholder='Select a status' />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              <SelectLabel>Status</SelectLabel>
+              <SelectItem value='all'>All</SelectItem>
+              <SelectItem value='pending'>Pending</SelectItem>
+              <SelectItem value='processing'>Processing</SelectItem>
+              <SelectItem value='success'>Success</SelectItem>
+              <SelectItem value='failed'>Failed</SelectItem>
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+      {/* Table container */}
+      <div className='rounded-xl border shadow-sm overflow-hidden'>
         <Table>
           <TableHeader className='bg-muted/50'>
             {table.getHeaderGroups().map(headerGroup => (
