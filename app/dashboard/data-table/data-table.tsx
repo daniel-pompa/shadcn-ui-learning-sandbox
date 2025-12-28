@@ -5,6 +5,7 @@ import {
   ColumnDef,
   ColumnFiltersState,
   SortingState,
+  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -33,6 +34,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+} from '@/components/ui/dropdown-menu';
+import { DropdownMenuTrigger } from '@radix-ui/react-dropdown-menu';
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -46,6 +53,7 @@ export function DataTable<TData, TValue>({
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [currentStatus, setCurrentStatus] = useState('all');
+  const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
 
   const table = useReactTable({
     data,
@@ -56,15 +64,18 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
     state: {
       sorting,
       columnFilters,
+      columnVisibility,
     },
   });
 
   return (
     <div className='w-full space-y-4'>
       <div className='flex items-center justify-between'>
+        {/* Search */}
         <Input
           placeholder='Filter emails...'
           value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
@@ -75,6 +86,7 @@ export function DataTable<TData, TValue>({
           }}
           className='max-w-sm'
         />
+        {/* Status filter */}
         <Select
           value={currentStatus}
           onValueChange={value => {
@@ -87,10 +99,10 @@ export function DataTable<TData, TValue>({
             table.getColumn('status')?.setFilterValue(value);
           }}
         >
-          <SelectTrigger className='w-45'>
+          <SelectTrigger className='w-45 ml-2'>
             <SelectValue placeholder='Select a status' />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent position='popper' sideOffset={4}>
             <SelectGroup>
               <SelectLabel>Status</SelectLabel>
               <SelectItem value='all'>All</SelectItem>
@@ -101,6 +113,33 @@ export function DataTable<TData, TValue>({
             </SelectGroup>
           </SelectContent>
         </Select>
+
+        {/* Columns toggle */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant='outline' size='sm' className='ml-auto'>
+              Columns
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align='end'>
+            {table
+              .getAllColumns()
+              .filter(column => column.getCanHide())
+              .filter(column => column.id !== 'actions')
+              .map(column => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className='capitalize'
+                    checked={column.getIsVisible()}
+                    onCheckedChange={value => column.toggleVisibility(!!value)}
+                  >
+                    {column.id}
+                  </DropdownMenuCheckboxItem>
+                );
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
       {/* Table container */}
       <div className='rounded-xl border shadow-sm overflow-hidden'>
