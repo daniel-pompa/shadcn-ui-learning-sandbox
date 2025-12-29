@@ -48,15 +48,23 @@ interface DataTableProps<TData, TValue> {
 
 export function DataTable<TData, TValue>({
   columns,
-  data,
+  data: initialData,
 }: DataTableProps<TData, TValue>) {
+  // Local state to manage data changes like deletions within the component lifecycle
+  const [tableData, setTableData] = useState<TData[]>(initialData);
+
+  // Table state management for core features
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [currentStatus, setCurrentStatus] = useState('all');
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
+  const [rowSelection, setRowSelection] = useState({});
+
+  // Derived state to check if any row is currently selected
+  const isAnyRowSelected = Object.keys(rowSelection).length > 0;
 
   const table = useReactTable({
-    data,
+    data: tableData,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -65,59 +73,90 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
     state: {
       sorting,
       columnFilters,
       columnVisibility,
+      rowSelection,
     },
   });
 
+  /** Filters out selected rows from the local state and resets the selection. */
+  const handleDeleteSelected = () => {
+    const selectedRowIds = table.getSelectedRowModel().rows.map(row => row.id);
+
+    const filteredData = tableData.filter((_, index) => {
+      // By default, TanStack Table uses row index as the ID string
+      return !selectedRowIds.includes(index.toString());
+    });
+
+    setTableData(filteredData);
+    setRowSelection({});
+  };
+
   return (
     <div className='w-full space-y-4'>
+      {/* Toolbar: search, filters and actions */}
       <div className='flex items-center justify-between'>
-        {/* Search */}
-        <Input
-          placeholder='Filter emails...'
-          value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
-          onChange={event => {
-            setCurrentStatus('all');
-            table.getColumn('status')?.setFilterValue(undefined);
-            table.getColumn('email')?.setFilterValue(event.target.value);
-          }}
-          className='max-w-sm'
-        />
-        {/* Status filter */}
-        <Select
-          value={currentStatus}
-          onValueChange={value => {
-            if (value === 'all') {
-              table.getColumn('status')?.setFilterValue(undefined);
+        <div className='flex items-center flex-1'>
+          {/* Email search filter */}
+          <Input
+            placeholder='Filter emails...'
+            value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
+            onChange={event => {
               setCurrentStatus('all');
-              return;
-            }
-            setCurrentStatus(value);
-            table.getColumn('status')?.setFilterValue(value);
-          }}
-        >
-          <SelectTrigger className='w-45 ml-2'>
-            <SelectValue placeholder='Select a status' />
-          </SelectTrigger>
-          <SelectContent position='popper' sideOffset={4}>
-            <SelectGroup>
-              <SelectLabel>Status</SelectLabel>
-              <SelectItem value='all'>All</SelectItem>
-              <SelectItem value='pending'>Pending</SelectItem>
-              <SelectItem value='processing'>Processing</SelectItem>
-              <SelectItem value='success'>Success</SelectItem>
-              <SelectItem value='failed'>Failed</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+              table.getColumn('status')?.setFilterValue(undefined);
+              table.getColumn('email')?.setFilterValue(event.target.value);
+            }}
+            className='max-w-sm'
+          />
 
-        {/* Columns toggle */}
+          {/* Status dropdown filter */}
+          <Select
+            value={currentStatus}
+            onValueChange={value => {
+              if (value === 'all') {
+                table.getColumn('status')?.setFilterValue(undefined);
+                setCurrentStatus('all');
+                return;
+              }
+              setCurrentStatus(value);
+              table.getColumn('status')?.setFilterValue(value);
+            }}
+          >
+            <SelectTrigger className='w-45 mx-2'>
+              <SelectValue placeholder='Select a status' />
+            </SelectTrigger>
+            {/* position='popper' ensures the content stays relative to the trigger */}
+            <SelectContent position='popper' sideOffset={4}>
+              <SelectGroup>
+                <SelectLabel>Status</SelectLabel>
+                <SelectItem value='all'>All</SelectItem>
+                <SelectItem value='pending'>Pending</SelectItem>
+                <SelectItem value='processing'>Processing</SelectItem>
+                <SelectItem value='success'>Success</SelectItem>
+                <SelectItem value='failed'>Failed</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+
+          {/* Delete action (visible only when rows are selected) */}
+          {isAnyRowSelected && (
+            <Button
+              variant='destructive'
+              onClick={handleDeleteSelected}
+              className='animate-in fade-in zoom-in duration-200'
+            >
+              Delete selected ({table.getSelectedRowModel().rows.length})
+            </Button>
+          )}
+        </div>
+
+        {/* Column visibility toggle dropdown */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline' size='sm' className='ml-auto'>
+            <Button variant='outline' className='ml-auto'>
               Columns
             </Button>
           </DropdownMenuTrigger>
@@ -141,7 +180,8 @@ export function DataTable<TData, TValue>({
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {/* Table container */}
+
+      {/* Data Table content */}
       <div className='rounded-xl border shadow-sm overflow-hidden'>
         <Table>
           <TableHeader className='bg-muted/50'>
@@ -176,6 +216,7 @@ export function DataTable<TData, TValue>({
                 </TableRow>
               ))
             ) : (
+              /* Empty state message */
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
@@ -189,12 +230,16 @@ export function DataTable<TData, TValue>({
         </Table>
       </div>
 
-      {/* Modern Pagination Bar */}
+      {/* Pagination and stats */}
       <div className='flex items-center justify-between px-2'>
-        <div className='text-sm text-muted-foreground font-medium'>
-          Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        <div className='text-muted-foreground flex-1 text-sm font-medium'>
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
         </div>
         <div className='flex items-center space-x-2'>
+          <div className='text-sm text-muted-foreground font-medium'>
+            Page {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+          </div>
           <Button
             variant='outline'
             size='sm'
