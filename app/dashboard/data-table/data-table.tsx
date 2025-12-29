@@ -102,7 +102,7 @@ export function DataTable<TData, TValue>({
         <div className='flex items-center flex-1'>
           {/* Email search filter */}
           <Input
-            placeholder='Filter emails...'
+            placeholder='Filter by client name, email, status...'
             value={(table.getColumn('email')?.getFilterValue() as string) ?? ''}
             onChange={event => {
               setCurrentStatus('all');

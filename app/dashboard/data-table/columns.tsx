@@ -1,6 +1,6 @@
 'use client';
 
-import { ColumnDef, SortDirection } from '@tanstack/react-table';
+import { ColumnDef, FilterFn, SortDirection } from '@tanstack/react-table';
 import { toast } from 'sonner';
 import { ArrowUpDown, ChevronDown, ChevronUp, MoreHorizontal } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -15,6 +15,32 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Payment } from '@/data/payments';
+
+/**
+ * Custom filter function for multi-column searching.
+ * @param row - The current row being filtered, provides access to the original data object.
+ * @param _columnId - The ID of the column being filtered (unused but required for positional signature).
+ * @param filterValue - The search string provided by the user from the UI input.
+ * @returns boolean - True if the row matches all parts of the search terms.
+ */
+const myCustomFilterFn: FilterFn<Payment> = (
+  row,
+  _columnId,
+  filterValue: string
+) => {
+  // Normalize the search input and split it into individual terms (words)
+  // This allows for multi-word searching regardless of order (e.g., "success john")
+  const searchTerms = filterValue.toLowerCase().split(' ');
+
+  // Aggregate the searchable row values into a single string for comparison
+  // We include clientName, email, and status to make them all searchable at once
+  const { clientName, email, status } = row.original;
+  const searchableRowContent = `${clientName} ${email} ${status}`.toLowerCase();
+
+  // Ensure EVERY search term is present in the aggregated row content
+  // This implements an "AND" logic filter (all words must match)
+  return searchTerms.every((term: string) => searchableRowContent.includes(term));
+};
 
 const SortedIcon = ({ isSorted }: { isSorted: false | SortDirection }) => {
   if (!isSorted) return <ArrowUpDown className='h-3.5 w-3.5 opacity-50' />;
@@ -129,6 +155,7 @@ export const columns: ColumnDef<Payment>[] = [
   },
   {
     accessorKey: 'email',
+    filterFn: myCustomFilterFn,
     header: ({ column }) => (
       <div>
         <Button
