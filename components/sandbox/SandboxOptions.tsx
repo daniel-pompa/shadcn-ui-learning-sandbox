@@ -17,36 +17,33 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Badge } from '@/components/ui/badge';
-import { Code2, Monitor, Cloud, Terminal, ExternalLink, Sparkles } from 'lucide-react';
+import {
+  Code2,
+  Monitor,
+  Cloud,
+  Terminal,
+  ExternalLink,
+  Sparkles,
+  LucideIcon,
+} from 'lucide-react';
 import { SANDBOX_CONFIG, type SandboxType } from '@/constants/sandbox';
 
-// Map icon names to Lucide components
-const iconMap = {
+const iconMap: Record<string, LucideIcon> = {
   Monitor,
   Cloud,
   Terminal,
 };
 
-/**
- * SandboxOptions Component
- * Dialog that shows available online code editor options
- * Users can choose their preferred sandbox environment
- */
 export const SandboxOptions = () => {
   const [open, setOpen] = useState(false);
 
-  /**
-   * Handle sandbox selection
-   * Opens the selected sandbox in a new tab and closes dialog
-   */
-  const handleSandboxSelect = (sandboxType: SandboxType) => {
+  const handleSandboxSelect = (sandboxType: SandboxType): void => {
     const sandbox = SANDBOX_CONFIG[sandboxType];
     window.open(sandbox.url, '_blank', 'noopener,noreferrer');
     setOpen(false);
   };
 
-  /** Helper to get brand-specific colors for badges */
-  const getBrandColor = (type: SandboxType) => {
+  const getBrandColor = (type: SandboxType): string => {
     switch (type) {
       case 'STACKBLITZ':
         return 'bg-blue-500/10 text-blue-600 border-blue-200';
@@ -64,25 +61,30 @@ export const SandboxOptions = () => {
       <Dialog open={open} onOpenChange={setOpen}>
         <Tooltip>
           <TooltipTrigger asChild>
-            <DialogTrigger asChild>
-              <Button
-                variant='secondary'
-                className='gap-2 font-medium border-primary/10 hover:border-primary/30 transition-all'
-              >
-                <Code2 className='h-5 w-5' />
-                Launch playground
-              </Button>
-            </DialogTrigger>
+            <span className='inline-block'>
+              <DialogTrigger asChild>
+                <Button
+                  variant='secondary'
+                  className='gap-2 font-medium border-primary/10 hover:border-primary/30 transition-all'
+                >
+                  <Code2 className='h-5 w-5' />
+                  Launch playground
+                </Button>
+              </DialogTrigger>
+            </span>
           </TooltipTrigger>
+
           <TooltipContent side='top' className='px-3 py-1.5 text-xs'>
             <p>Open a live development environment</p>
           </TooltipContent>
         </Tooltip>
 
-        <DialogContent className='sm:max-w-xl'>
+        <DialogContent className='sm:max-w-xl text-foreground'>
           <DialogHeader>
             <DialogTitle className='flex items-center gap-2 text-2xl tracking-tight'>
-              <Code2 className='h-8 w-8 bg-gray-900 p-2 rounded text-white font-black' />
+              <div className='bg-foreground p-1.5 rounded'>
+                <Code2 className='h-5 w-5 text-background' />
+              </div>
               Development environments
             </DialogTitle>
             <DialogDescription className='text-base'>
@@ -91,31 +93,28 @@ export const SandboxOptions = () => {
             </DialogDescription>
           </DialogHeader>
 
-          {/* Sandbox options list */}
           <div className='grid gap-4 py-6'>
             {(
               Object.entries(SANDBOX_CONFIG) as [
                 SandboxType,
-                (typeof SANDBOX_CONFIG)[keyof typeof SANDBOX_CONFIG]
+                (typeof SANDBOX_CONFIG)[SandboxType]
               ][]
             ).map(([key, sandbox]) => {
-              const IconComponent = iconMap[sandbox.icon];
+              const IconComponent = iconMap[sandbox.icon] || Monitor;
               const brandStyle = getBrandColor(key);
 
               return (
                 <button
                   key={key}
                   onClick={() => handleSandboxSelect(key)}
-                  className='w-full text-left flex items-start gap-4 p-5 border rounded-xl hover:bg-accent/50 hover:border-primary/40 transition-all duration-300 group cursor-pointer shadow-xs hover:shadow-md'
+                  className='w-full text-left flex items-start gap-4 p-5 border rounded-xl hover:bg-accent/50 hover:border-primary/40 transition-all duration-300 group cursor-pointer shadow-sm hover:shadow-md'
                 >
-                  {/* Icon */}
                   <div
                     className={`p-2.5 rounded-lg border transition-colors ${brandStyle}`}
                   >
                     <IconComponent className='h-6 w-6' />
                   </div>
 
-                  {/* Content */}
                   <div className='flex-1 space-y-2.5'>
                     <div className='flex items-center justify-between'>
                       <h3 className='font-bold text-lg leading-none'>{sandbox.name}</h3>
@@ -126,13 +125,12 @@ export const SandboxOptions = () => {
                       {sandbox.description}
                     </p>
 
-                    {/* Features list with semantic badges */}
                     <div className='flex flex-wrap gap-2'>
-                      {sandbox.features.map(feature => (
+                      {sandbox.features.map((feature: string) => (
                         <Badge
                           key={feature}
                           variant='secondary'
-                          className={`text-xs font-semibold py-1 px-2`}
+                          className='text-xs font-semibold py-0.5 px-2'
                         >
                           {feature}
                         </Badge>
@@ -144,14 +142,16 @@ export const SandboxOptions = () => {
             })}
           </div>
 
-          {/* Educational note */}
           <div className='pt-6 border-t'>
             <div className='flex gap-3 p-4 bg-primary/5 rounded-xl border border-primary/10'>
               <Sparkles className='h-5 w-5 text-primary shrink-0 animate-pulse' />
               <p className='text-sm text-muted-foreground leading-normal'>
-                <span className='font-bold'>Ready to save your work?</span> Sign in with
-                your account and click the <span className='font-bold'>Fork</span> button
-                to create your own permanent workspace.
+                <span className='font-bold text-foreground'>
+                  Ready to save your work?
+                </span>{' '}
+                Sign in with your account and click the{' '}
+                <span className='font-bold text-foreground'>Fork</span> button to create
+                your own permanent workspace.
               </p>
             </div>
           </div>
