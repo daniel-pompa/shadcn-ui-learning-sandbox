@@ -30,6 +30,7 @@ import {
   BellRing,
   Layers,
   Table2,
+  Form,
 } from 'lucide-react';
 import { FaFacebook, FaInstagram, FaGithub, FaDribbble } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
@@ -60,6 +61,7 @@ const links = [
   { name: 'sonner', href: 'sonner', icon: BellRing },
   { name: 'tabs', href: 'tabs', icon: Layers },
   { name: 'data table', href: 'data-table', icon: Table2 },
+  { name: 'form', href: 'form', icon: Form },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
