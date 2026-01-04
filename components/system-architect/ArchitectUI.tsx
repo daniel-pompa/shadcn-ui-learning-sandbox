@@ -41,32 +41,36 @@ export const TechSelector = ({
         <PopoverTrigger asChild>
           <Button
             variant='outline'
-            className='h-11 justify-between bg-white/50 hover:bg-white transition-all border-slate-200 shadow-sm px-3'
+            className='h-11 justify-between bg-white/50 hover:bg-white dark:bg-slate-950/50 dark:hover:bg-slate-900 transition-all border-slate-200 dark:border-slate-800 shadow-sm px-3'
           >
             <div className='flex items-center gap-2 truncate'>
               {selected ? (
                 <>
                   <selected.icon className={cn('h-4 w-4 shrink-0', selected.color)} />
-                  <span className='font-medium text-slate-900'>{selected.label}</span>
+                  <span className='font-medium text-slate-900 dark:text-slate-100'>
+                    {selected.label}
+                  </span>
                 </>
               ) : (
                 <span className='text-muted-foreground font-normal'>{placeholder}</span>
               )}
             </div>
-            <ChevronsUpDown className='h-3.5 w-3.5 opacity-30 shrink-0' />
+            <ChevronsUpDown className='h-3.5 w-3.5 opacity-30 dark:opacity-50 shrink-0' />
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className='w-[--radix-popover-trigger-width] p-1 shadow-xl'
+          className='w-[--radix-popover-trigger-width] p-1 shadow-xl dark:bg-slate-950 dark:border-slate-800'
           align='start'
         >
-          <Command>
+          <Command className='dark:bg-slate-950'>
             <CommandInput
               placeholder={`Search ${label.toLowerCase()}...`}
               className='h-9'
             />
             <CommandList>
-              <CommandEmpty className='py-4 px-1 text-xs'>No options found.</CommandEmpty>
+              <CommandEmpty className='py-4 px-1 text-xs dark:text-slate-400'>
+                No options found.
+              </CommandEmpty>
               <CommandGroup>
                 {options.map(opt => (
                   <CommandItem
@@ -76,10 +80,10 @@ export const TechSelector = ({
                       onChange(v === value ? '' : v);
                       setOpen(false);
                     }}
-                    className='flex items-center py-2.5 rounded-md cursor-pointer'
+                    className='flex items-center py-2.5 rounded-md cursor-pointer dark:aria-selected:bg-slate-900'
                   >
                     <opt.icon className={cn('mr-2 h-4 w-4', opt.color)} />
-                    <span className='text-sm'>{opt.label}</span>
+                    <span className='text-sm dark:text-slate-300'>{opt.label}</span>
                     <Check
                       className={cn(
                         'ml-auto h-4 w-4 text-primary',
@@ -108,13 +112,15 @@ export function BlueprintRow({
 }) {
   return (
     <div className='flex flex-col gap-1 py-1'>
-      <span className='text-[9px] font-black uppercase tracking-widest text-slate-400/80'>
+      <span className='text-[9px] font-black uppercase tracking-widest text-slate-400/80 dark:text-slate-500'>
         {label}
       </span>
       <div
         className={cn(
           'text-xs transition-all',
-          isSet ? 'font-bold text-slate-900' : 'text-slate-300'
+          isSet
+            ? 'font-bold text-slate-900 dark:text-slate-200'
+            : 'text-slate-300 dark:text-slate-700'
         )}
       >
         {isSet ? value : '---'}

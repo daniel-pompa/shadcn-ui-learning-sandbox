@@ -7,7 +7,7 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge'; // Importamos el componente Badge
+import { Badge } from '@/components/ui/badge';
 import {
   Bell,
   Calendar,
@@ -22,7 +22,6 @@ import {
   Edit,
 } from 'lucide-react';
 
-// Definimos el tipo para cada card
 interface DemoCard {
   id: number;
   title: string;
@@ -96,7 +95,7 @@ export default function CardDemo() {
       id: 4,
       title: 'User profile',
       description: 'Manage your account and settings',
-      icon: <User className='h-6 w-6 text-orange-500' />,
+      icon: <User className='h-6 w-6 text-orange-500 dark:text-orange-400' />,
       content:
         'Complete your profile to unlock all features. Your profile is 80% complete.',
       footerText: 'Member since 2023',
@@ -110,7 +109,7 @@ export default function CardDemo() {
       id: 5,
       title: 'Analytics',
       description: 'View project statistics and insights',
-      icon: <BarChart className='h-6 w-6 text-cyan-500' />,
+      icon: <BarChart className='h-6 w-6 text-cyan-500 dark:text-cyan-400' />,
       content:
         'Traffic is up by 15% this week. New users increased by 20% compared to last week.',
       footerText: 'Real-time data',
@@ -128,7 +127,7 @@ export default function CardDemo() {
       id: 6,
       title: 'Task manager',
       description: 'Track your tasks and progress',
-      icon: <CheckCircle className='h-6 w-6 text-emerald-500' />,
+      icon: <CheckCircle className='h-6 w-6 text-emerald-500 dark:text-emerald-400' />,
       content: 'You have completed 12 out of 15 tasks this week. Great progress!',
       footerText: '3 tasks remaining',
       actions: [
@@ -149,15 +148,21 @@ export default function CardDemo() {
         {demoCards.map(card => (
           <Card
             key={card.id}
-            className='overflow-hidden border-gray-200 shadow-sm hover:shadow-md transition-shadow duration-300'
+            className='overflow-hidden border-gray-200 dark:border-slate-800 shadow-sm hover:shadow-md dark:hover:border-slate-700 transition-all duration-300 dark:bg-slate-950'
           >
             <CardHeader className='pb-3'>
               <div className='flex items-start justify-between'>
                 <div className='flex items-center space-x-3'>
-                  <div className='p-2 bg-gray-100 rounded-lg'>{card.icon}</div>
+                  <div className='p-2 bg-gray-100 dark:bg-slate-800 rounded-lg'>
+                    {card.icon}
+                  </div>
                   <div>
-                    <CardTitle className='text-lg'>{card.title}</CardTitle>
-                    <CardDescription className='mt-1'>{card.description}</CardDescription>
+                    <CardTitle className='text-lg dark:text-slate-100'>
+                      {card.title}
+                    </CardTitle>
+                    <CardDescription className='mt-1 dark:text-slate-400'>
+                      {card.description}
+                    </CardDescription>
                   </div>
                 </div>
                 {card.badge && (
@@ -166,10 +171,12 @@ export default function CardDemo() {
               </div>
             </CardHeader>
             <CardContent className='pb-3'>
-              <p className='text-gray-700'>{card.content}</p>
+              <p className='text-gray-700 dark:text-slate-300'>{card.content}</p>
             </CardContent>
-            <CardFooter className='pt-3 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
-              <div className='text-sm text-gray-500'>{card.footerText}</div>
+            <CardFooter className='pt-3 border-t border-gray-100 dark:border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4'>
+              <div className='text-sm text-gray-500 dark:text-slate-500'>
+                {card.footerText}
+              </div>
               <div className='flex space-x-2'>
                 {card.actions?.map((action, index) => (
                   <Button
@@ -188,18 +195,18 @@ export default function CardDemo() {
         ))}
       </div>
 
-      <Card className='mt-8 border-blue-100 bg-blue-50'>
+      <Card className='mt-8 border-blue-100 bg-blue-50 dark:bg-blue-950/20 dark:border-blue-900/50'>
         <CardHeader>
-          <CardTitle className='text-blue-800 flex items-center gap-2'>
+          <CardTitle className='text-blue-800 dark:text-blue-300 flex items-center gap-2'>
             <AlertCircle className='h-5 w-5' />
             About these cards
           </CardTitle>
-          <CardDescription className='text-blue-700 text-base'>
+          <CardDescription className='text-blue-700 dark:text-blue-400 text-base'>
             This demo showcases the flexibility of the Card component from shadcn/ui
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <p className='text-blue-800'>
+          <p className='text-blue-800 dark:text-blue-200/80'>
             Each card uses the same base component but demonstrates different
             configurations, including headers with icons, badges, multiple action buttons,
             and footers. This is part of the Shadcn/ui Learning Sandbox project.

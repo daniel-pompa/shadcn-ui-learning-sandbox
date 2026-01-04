@@ -28,7 +28,7 @@ const techStack = [
 
 export const TechStackSection = () => {
   return (
-    <section className='mt-12 py-12 border-y border-muted bg-muted/5 rounded-3xl'>
+    <section className='mt-12 py-12 border-y border-muted bg-muted/5'>
       <div className='flex flex-col lg:flex-row items-center-safe gap-10'>
         <h2 className='font-bold tracking-widest text-muted-foreground/60 text-center'>
           Engineered with the modern web stack

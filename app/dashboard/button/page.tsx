@@ -11,12 +11,14 @@ import { FaGithub, FaGoogle } from 'react-icons/fa';
 
 export default function ButtonDemo() {
   return (
-    <div className='grid grid-cols-2 md:grid-cols-6 gap-4'>
+    <div className='grid grid-cols-2 md:grid-cols-6 gap-4 transition-colors'>
       <Button>Default</Button>
       <Button variant='destructive'>Destructive</Button>
       <Button variant='primary'>Primary</Button>
       <Button variant='secondary'>Secondary</Button>
-      <Button variant='outline'>Outline</Button>
+      <Button variant='outline' className='dark:border-slate-800 dark:hover:bg-slate-900'>
+        Outline
+      </Button>
       <Button variant='success'>Success</Button>
       <Button variant='warning'>Warning</Button>
       <Button variant='info'>Info</Button>
@@ -24,10 +26,14 @@ export default function ButtonDemo() {
       <Button capitalize onClick={() => console.log('clicked')}>
         Click me
       </Button>
-      <Button variant='outline' capitalize>
+      <Button
+        variant='outline'
+        capitalize
+        className='dark:border-slate-800 dark:hover:bg-slate-900'
+      >
         <GitBranchPlus /> New branch
       </Button>
-      <Button variant='outline' disabled>
+      <Button variant='outline' disabled className='dark:border-slate-800'>
         <Spinner />
         Submit
       </Button>
@@ -40,8 +46,12 @@ export default function ButtonDemo() {
       <Button variant='google' capitalize>
         <FaGoogle /> Login with google
       </Button>
+
       <ButtonGroup className='w-full'>
-        <Button variant='outline' className='grow'>
+        <Button
+          variant='outline'
+          className='grow dark:border-slate-800 dark:hover:bg-slate-900'
+        >
           <BotIcon /> Copilot
         </Button>
         <Popover>
@@ -50,26 +60,29 @@ export default function ButtonDemo() {
               variant='outline'
               size='icon'
               aria-label='Open Popover'
-              className='cursor-pointer'
+              className='cursor-pointer dark:border-slate-800 dark:hover:bg-slate-900'
             >
               <ChevronDownIcon />
             </Button>
           </PopoverTrigger>
           <PopoverContent
             align='end'
-            className='border rounded-xl p-0 text-sm max-w-72 bg-white mt-1'
+            className='border dark:border-slate-800 rounded-xl p-0 text-sm max-w-72 bg-white dark:bg-slate-950 shadow-lg mt-1 z-50'
           >
-            <div className='px-4 py-3 border-b'>
-              <div className='text-sm font-medium'>Agent Tasks</div>
+            <div className='px-4 py-3 border-b dark:border-slate-800'>
+              <div className='text-sm font-medium dark:text-slate-100'>Agent Tasks</div>
             </div>
-            <Separator />
+            {/* Componente Separator nativo o personalizado con soporte dark */}
+            <Separator className='dark:bg-slate-800' />
             <div className='p-4 text-sm *:[p:not(:last-child)]:mb-2'>
               <Textarea
                 placeholder='Describe your task in natural language.'
-                className='mb-4 resize-none'
+                className='mb-4 resize-none dark:bg-slate-900 dark:border-slate-800 dark:text-slate-200'
               />
-              <p className='font-medium'>Start a new task with Copilot</p>
-              <p className='text-muted-foreground'>
+              <p className='font-medium dark:text-slate-100'>
+                Start a new task with Copilot
+              </p>
+              <p className='text-muted-foreground dark:text-slate-400'>
                 Describe your task in natural language. Copilot will work in the
                 background and open a pull request for your review.
               </p>
@@ -77,8 +90,13 @@ export default function ButtonDemo() {
           </PopoverContent>
         </Popover>
       </ButtonGroup>
-      <Button variant='ghost'>Ghost</Button>
-      <Button variant='link'>Link</Button>
+
+      <Button variant='ghost' className='dark:text-slate-300 dark:hover:bg-slate-900'>
+        Ghost
+      </Button>
+      <Button variant='link' className='dark:text-blue-400'>
+        Link
+      </Button>
     </div>
   );
 }

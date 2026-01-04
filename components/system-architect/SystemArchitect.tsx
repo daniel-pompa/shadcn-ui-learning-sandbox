@@ -33,12 +33,12 @@ export const SystemArchitect = () => {
   return (
     <>
       {/* Header */}
-      <div className='flex flex-col md:flex-row items-start md:items-center justify-between mb-8 border-b pb-6'>
+      <div className='flex flex-col md:flex-row items-start md:items-center justify-between mb-8 border-b dark:border-slate-800 pb-6'>
         <div className='space-y-1'>
-          <h1 className='text-3xl lg:text-4xl font-bold tracking-tight'>
+          <h1 className='text-3xl lg:text-4xl font-bold tracking-tight dark:text-slate-50'>
             System Architect
           </h1>
-          <p className='text-sm font-medium text-muted-foreground'>
+          <p className='text-sm font-medium text-muted-foreground dark:text-slate-400'>
             Stack configuration and infrastructure mapping.
           </p>
         </div>
@@ -46,7 +46,7 @@ export const SystemArchitect = () => {
           variant='outline'
           size='sm'
           onClick={() => setState({})}
-          className='mt-4 md:mt-0 font-semibold text-muted-foreground hover:text-destructive transition-colors'
+          className='mt-4 md:mt-0 font-semibold text-muted-foreground hover:text-destructive dark:border-slate-800 dark:hover:bg-destructive/10 transition-colors'
         >
           <RotateCcw className='mr-2 h-4 w-4' />
           Flush manifest
@@ -117,30 +117,32 @@ export const SystemArchitect = () => {
 
         {/* Blueprint manifest */}
         <div className='lg:col-span-4 lg:sticky lg:top-8'>
-          <Card className='rounded-xl border border-border bg-slate-50 shadow-sm overflow-hidden py-0'>
-            <CardHeader className='bg-background p-5 border-b space-y-0 py-5'>
+          <Card className='rounded-xl border border-border dark:border-slate-800 bg-slate-50 dark:bg-slate-900/40 shadow-sm overflow-hidden py-0'>
+            <CardHeader className='bg-background dark:bg-slate-900/60 p-5 border-b dark:border-slate-800 space-y-0 py-5'>
               <div className='flex justify-between items-end mb-4'>
                 <div className='space-y-1'>
-                  <span className='text-xs font-black uppercase text-primary tracking-wider'>
+                  <span className='text-xs font-black uppercase text-primary dark:text-blue-400 tracking-wider'>
                     Build Readiness
                   </span>
-                  <CardTitle className='text-2xl font-bold text-foreground'>
+                  <CardTitle className='text-2xl font-bold text-foreground dark:text-slate-100'>
                     {completedSteps}{' '}
-                    <span className='text-muted-foreground/30'>/ {totalSteps}</span>
+                    <span className='text-muted-foreground/30 dark:text-slate-600'>
+                      / {totalSteps}
+                    </span>
                   </CardTitle>
                 </div>
-                <span className='text-xs font-mono font-bold text-muted-foreground'>
+                <span className='text-xs font-mono font-bold text-muted-foreground dark:text-slate-500'>
                   {Math.round(progressPercent)}%
                 </span>
               </div>
-              <Progress value={progressPercent} className='h-1.5' />
+              <Progress value={progressPercent} className='h-1.5 dark:bg-slate-800' />
             </CardHeader>
 
             <CardContent className='p-6 space-y-6'>
               <div className='grid grid-cols-2 gap-x-6 gap-y-8'>
                 {/* Application section */}
                 <div className='space-y-4'>
-                  <div className='flex items-center gap-2 text-muted-foreground border-b pb-2'>
+                  <div className='flex items-center gap-2 text-muted-foreground dark:text-slate-500 border-b dark:border-slate-800/60 pb-2'>
                     <Layers className='h-3.5 w-3.5' />
                     <span className='text-xs font-bold uppercase tracking-tight'>
                       Application
@@ -160,7 +162,7 @@ export const SystemArchitect = () => {
 
                 {/* Server section */}
                 <div className='space-y-4'>
-                  <div className='flex items-center gap-2 text-muted-foreground border-b pb-2'>
+                  <div className='flex items-center gap-2 text-muted-foreground dark:text-slate-500 border-b dark:border-slate-800/60 pb-2'>
                     <Server className='h-3.5 w-3.5' />
                     <span className='text-xs font-bold uppercase tracking-tight'>
                       Server-side
@@ -180,7 +182,7 @@ export const SystemArchitect = () => {
 
                 {/* Database section */}
                 <div className='space-y-4'>
-                  <div className='flex items-center gap-2 text-muted-foreground border-b pb-2'>
+                  <div className='flex items-center gap-2 text-muted-foreground dark:text-slate-500 border-b dark:border-slate-800/60 pb-2'>
                     <Database className='h-3.5 w-3.5' />
                     <span className='text-xs font-bold uppercase tracking-tight'>
                       Persistence
@@ -200,7 +202,7 @@ export const SystemArchitect = () => {
 
                 {/* Infrastructure section */}
                 <div className='space-y-4'>
-                  <div className='flex items-center gap-2 text-muted-foreground border-b pb-2'>
+                  <div className='flex items-center gap-2 text-muted-foreground dark:text-slate-500 border-b dark:border-slate-800/60 pb-2'>
                     <Cloud className='h-3.5 w-3.5' />
                     <span className='text-xs font-bold uppercase tracking-tight'>
                       Cloud & QA
@@ -220,18 +222,24 @@ export const SystemArchitect = () => {
               </div>
 
               {/* Terminal output */}
-              <div className='mt-6 p-4 rounded-md bg-slate-900 font-mono text-xs leading-relaxed relative overflow-hidden group'>
+              <div className='mt-6 p-4 rounded-md bg-slate-900 dark:bg-black font-mono text-xs leading-relaxed relative overflow-hidden group border dark:border-slate-800'>
                 <div className='absolute top-0 right-0 p-2 opacity-20'>
                   <Terminal className='h-4 w-4 text-white' />
                 </div>
                 <p className='text-emerald-400 mb-1'>$ stack-map --analyze --env prod</p>
-                <p className='text-slate-300'>
+                <p className='text-slate-300 dark:text-slate-400'>
                   STATUS:{' '}
-                  {completedSteps === totalSteps ? 'READY_FOR_BUILD' : 'CONFIGURING...'}
+                  {completedSteps === totalSteps ? (
+                    <span className='text-emerald-500 font-bold'>READY_FOR_BUILD</span>
+                  ) : (
+                    <span className='text-amber-500'>CONFIGURING...</span>
+                  )}
                 </p>
-                <p className='text-slate-300'>
+                <p className='text-slate-300 dark:text-slate-400'>
                   TARGET:{' '}
-                  {resolve(state.infra, Data.cloudInfrastructure) || 'NOT_DEFINED'}
+                  <span className='text-blue-400'>
+                    {resolve(state.infra, Data.cloudInfrastructure) || 'NOT_DEFINED'}
+                  </span>
                 </p>
               </div>
             </CardContent>
@@ -248,7 +256,7 @@ export const SystemArchitect = () => {
                   Live Telemetry
                 </span>
               </div>
-              <div className='h-2 w-2 rounded-full bg-emerald-500' />
+              <div className='h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]' />
             </div>
 
             <CardContent className='p-0 space-y-12'>
@@ -258,13 +266,13 @@ export const SystemArchitect = () => {
                   <span
                     className={cn(
                       'flex items-center gap-2 font-bold uppercase tracking-tight',
-                      state.auth ? 'text-emerald-500' : 'text-slate-500'
+                      state.auth ? 'text-emerald-500' : 'text-slate-600'
                     )}
                   >
                     <ShieldCheck
                       className={cn(
                         'h-4 w-4',
-                        state.auth ? 'text-emerald-500' : 'text-slate-500'
+                        state.auth ? 'text-emerald-500' : 'text-slate-600'
                       )}
                     />
                     Security Integrity
@@ -272,7 +280,7 @@ export const SystemArchitect = () => {
                   <span
                     className={cn(
                       'font-mono font-bold',
-                      state.auth ? 'text-emerald-500' : 'text-slate-500'
+                      state.auth ? 'text-emerald-500' : 'text-slate-600'
                     )}
                   >
                     {state.auth ? '98.2%' : '0.0%'}
@@ -290,13 +298,13 @@ export const SystemArchitect = () => {
                   <span
                     className={cn(
                       'flex items-center gap-2 font-bold uppercase tracking-tight',
-                      state.infra ? 'text-blue-500' : 'text-slate-500'
+                      state.infra ? 'text-blue-500' : 'text-slate-600'
                     )}
                   >
                     <Globe
                       className={cn(
                         'h-4 w-4',
-                        state.infra ? 'text-blue-500' : 'text-slate-500'
+                        state.infra ? 'text-blue-500' : 'text-slate-600'
                       )}
                     />
                     Edge Latency
@@ -304,7 +312,7 @@ export const SystemArchitect = () => {
                   <span
                     className={cn(
                       'font-mono font-bold',
-                      state.infra ? 'text-blue-500' : 'text-slate-500'
+                      state.infra ? 'text-blue-500' : 'text-slate-600'
                     )}
                   >
                     {state.infra ? '24ms' : '--'}
@@ -319,28 +327,28 @@ export const SystemArchitect = () => {
               {/* System stats */}
               <div className='pt-8 border-t border-slate-800 grid grid-cols-2 gap-8 text-center'>
                 <div className='space-y-1.5'>
-                  <p className='text-xs font-bold uppercase text-slate-500 tracking-widest'>
+                  <p className='text-xs font-bold uppercase text-slate-600 tracking-widest'>
                     Complexity
                   </p>
-                  <p className='text-sm font-medium text-slate-200'>
+                  <p className='text-sm font-medium text-slate-300'>
                     {completedSteps > 5 ? 'High / Optimized' : 'Standard'}
                   </p>
                 </div>
                 <div className='space-y-1.5'>
-                  <p className='text-xs font-bold uppercase text-slate-500 tracking-widest'>
+                  <p className='text-xs font-bold uppercase text-slate-600 tracking-widest'>
                     Build Version
                   </p>
-                  <p className='text-sm font-medium text-slate-200'>v22.0.4-LTS</p>
+                  <p className='text-sm font-medium text-slate-300'>v22.0.4-LTS</p>
                 </div>
               </div>
 
               <Button
                 disabled={completedSteps < totalSteps}
                 className={cn(
-                  'w-full h-12 uppercase text-xs font-black tracking-widest transition-all duration-300',
+                  'w-full h-12 uppercase text-xs font-black tracking-widest transition-all duration-300 shadow-lg',
                   completedSteps === totalSteps
-                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white'
-                    : 'bg-slate-900 text-slate-500 border border-slate-800 cursor-not-allowed'
+                    ? 'bg-emerald-600 hover:bg-emerald-500 text-white shadow-emerald-900/20'
+                    : 'bg-slate-900 text-slate-600 border border-slate-800 cursor-not-allowed shadow-none'
                 )}
               >
                 {completedSteps === totalSteps ? 'Provision System' : 'Awaiting Manifest'}

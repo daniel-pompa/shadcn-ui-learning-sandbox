@@ -14,10 +14,7 @@ import {
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
 
-/**
- * Technical terms dictionary to ensure correct casing for acronyms.
- * Any key added here will be rendered exactly as the value.
- */
+/** Technical terms dictionary to ensure correct casing for acronyms. */
 const SPECIAL_CASINGS: Record<string, string> = {
   otp: 'OTP',
   ui: 'UI',
@@ -31,20 +28,15 @@ export function DynamicBreadcrumb() {
 
   const showBackButton = segments.length > 1;
 
-  /**
-   * Formats the URL segment into a readable label.
-   * Handles hyphenated strings and applies special casing for technical terms.
-   */
+  /** Formats the URL segment into a readable label. */
   const getFormattedLabel = (segment: string): string => {
     return segment
       .split('-')
       .map(word => {
         const lowerWord = word.toLowerCase();
-        // Check if the word is defined in our special casing dictionary
         if (SPECIAL_CASINGS[lowerWord]) {
           return SPECIAL_CASINGS[lowerWord];
         }
-        // Fallback to standard Title Case
         return word.charAt(0).toUpperCase() + word.slice(1);
       })
       .join(' ');
@@ -56,7 +48,7 @@ export function DynamicBreadcrumb() {
         <Button
           variant='outline'
           size='icon'
-          className='h-8 w-8 shrink-0 lg:hidden'
+          className='h-8 w-8 shrink-0 lg:hidden dark:border-slate-800 dark:hover:bg-slate-800 dark:text-slate-400'
           onClick={() => router.back()}
         >
           <ChevronLeft className='h-4 w-4' />
@@ -71,7 +63,7 @@ export function DynamicBreadcrumb() {
             <BreadcrumbLink asChild>
               <Link
                 href='/dashboard/home'
-                className='flex items-center text-gray-500 hover:text-gray-900 transition-colors'
+                className='flex items-center text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors'
               >
                 <Home className='h-4 w-4' />
               </Link>
@@ -89,18 +81,18 @@ export function DynamicBreadcrumb() {
             return (
               <React.Fragment key={href}>
                 <BreadcrumbSeparator>
-                  <ChevronRight className='h-4 w-4 text-gray-400' />
+                  <ChevronRight className='h-4 w-4 text-gray-400 dark:text-slate-600' />
                 </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   {isLast ? (
-                    <BreadcrumbPage className='font-semibold text-gray-900'>
+                    <BreadcrumbPage className='font-semibold text-gray-900 dark:text-slate-100'>
                       {label}
                     </BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
                       <Link
                         href={href}
-                        className='text-gray-500 hover:text-gray-900 transition-colors'
+                        className='text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors'
                       >
                         {label}
                       </Link>

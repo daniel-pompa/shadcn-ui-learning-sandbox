@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import {
@@ -19,9 +21,9 @@ const learningModules: LearningModule[] = [
     href: 'https://ui.shadcn.com/docs/components',
     badge: 'Fundamentals',
     color: 'from-blue-500 to-cyan-500',
-    bgColor: 'bg-blue-50',
-    iconColor: 'text-blue-600',
-    buttonColor: 'bg-blue-600 hover:bg-blue-700',
+    bgColor: 'bg-blue-50 dark:bg-blue-950/20',
+    iconColor: 'text-blue-600 dark:text-blue-400',
+    buttonColor: 'bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500',
   },
   {
     title: 'Data visualization',
@@ -30,9 +32,10 @@ const learningModules: LearningModule[] = [
     href: 'https://ui.shadcn.com/docs/components/data-table',
     badge: 'Advanced',
     color: 'from-emerald-500 to-teal-500',
-    bgColor: 'bg-emerald-50',
-    iconColor: 'text-emerald-600',
-    buttonColor: 'bg-emerald-600 hover:bg-emerald-700',
+    bgColor: 'bg-emerald-50 dark:bg-emerald-950/20',
+    iconColor: 'text-emerald-600 dark:text-emerald-400',
+    buttonColor:
+      'bg-emerald-600 hover:bg-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500',
   },
   {
     title: 'Forms and validation',
@@ -40,9 +43,10 @@ const learningModules: LearningModule[] = [
     href: 'https://ui.shadcn.com/docs/forms',
     badge: 'Interactive',
     color: 'from-orange-500 to-amber-500',
-    bgColor: 'bg-orange-50',
-    iconColor: 'text-orange-600',
-    buttonColor: 'bg-orange-600 hover:bg-orange-700',
+    bgColor: 'bg-orange-50 dark:bg-orange-950/20',
+    iconColor: 'text-orange-600 dark:text-orange-400',
+    buttonColor:
+      'bg-orange-600 hover:bg-orange-700 dark:bg-orange-600 dark:hover:bg-orange-500',
   },
   {
     title: 'Theming and dark mode',
@@ -50,31 +54,42 @@ const learningModules: LearningModule[] = [
     href: 'https://ui.shadcn.com/docs/theming',
     badge: 'Styling',
     color: 'from-indigo-500 to-violet-500',
-    bgColor: 'bg-indigo-50',
-    iconColor: 'text-indigo-600',
-    buttonColor: 'bg-indigo-600 hover:bg-indigo-700',
+    bgColor: 'bg-indigo-50 dark:bg-indigo-950/20',
+    iconColor: 'text-indigo-600 dark:text-indigo-400',
+    buttonColor:
+      'bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500',
   },
 ];
 
 // Helper for badge colors
 const getBadgeColor = (bgColor: string) => {
   const colorMap: Record<string, string> = {
-    'bg-blue-50': 'bg-blue-100 text-blue-800 hover:bg-blue-100 border-blue-200',
-    'bg-emerald-50':
-      'bg-emerald-100 text-emerald-800 hover:bg-emerald-100 border-emerald-200',
-    'bg-orange-50': 'bg-orange-100 text-orange-800 hover:bg-orange-100 border-orange-200',
-    'bg-indigo-50': 'bg-indigo-100 text-indigo-800 hover:bg-indigo-100 border-indigo-200',
+    'bg-blue-50 dark:bg-blue-950/20':
+      'bg-blue-100 text-blue-800 hover:bg-blue-100 border-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800',
+    'bg-emerald-50 dark:bg-emerald-950/20':
+      'bg-emerald-100 text-emerald-800 hover:bg-emerald-100 border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-300 dark:border-emerald-800',
+    'bg-orange-50 dark:bg-orange-950/20':
+      'bg-orange-100 text-orange-800 hover:bg-orange-100 border-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:border-orange-800',
+    'bg-indigo-50 dark:bg-indigo-950/20':
+      'bg-indigo-100 text-indigo-800 hover:bg-indigo-100 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300 dark:border-indigo-800',
   };
-  return colorMap[bgColor] || 'bg-gray-100 text-gray-800 border-gray-200';
+  return (
+    colorMap[bgColor] ||
+    'bg-gray-100 text-gray-800 border-gray-200 dark:bg-gray-800 dark:text-gray-300'
+  );
 };
 
 // Helper for card border colors
 const getBorderColor = (bgColor: string) => {
   const borderMap: Record<string, string> = {
-    'bg-blue-50': 'border-blue-100 hover:border-blue-300',
-    'bg-emerald-50': 'border-emerald-100 hover:border-emerald-300',
-    'bg-orange-50': 'border-orange-100 hover:border-orange-300',
-    'bg-indigo-50': 'border-indigo-100 hover:border-indigo-300',
+    'bg-blue-50 dark:bg-blue-950/20':
+      'border-blue-100 hover:border-blue-300 dark:border-blue-900/50 dark:hover:border-blue-800',
+    'bg-emerald-50 dark:bg-emerald-950/20':
+      'border-emerald-100 hover:border-emerald-300 dark:border-emerald-900/50 dark:hover:border-emerald-800',
+    'bg-orange-50 dark:bg-orange-950/20':
+      'border-orange-100 hover:border-orange-300 dark:border-orange-900/50 dark:hover:border-orange-800',
+    'bg-indigo-50 dark:bg-indigo-950/20':
+      'border-indigo-100 hover:border-indigo-300 dark:border-indigo-900/50 dark:hover:border-indigo-800',
   };
   return borderMap[bgColor] || 'border-border hover:border-muted-foreground/30';
 };
@@ -83,8 +98,10 @@ export const LearningModulesSection = () => {
   return (
     <section className='py-8'>
       <div className='mb-8'>
-        <h2 className='text-2xl font-bold mb-4'>Structured learning path</h2>
-        <p className='text-muted-foreground'>
+        <h2 className='text-2xl font-bold mb-4 dark:text-slate-50'>
+          Structured learning path
+        </h2>
+        <p className='text-muted-foreground dark:text-slate-400'>
           Follow these modules to systematically master Shadcn/ui from basics to advanced
           topics.
         </p>
@@ -108,10 +125,10 @@ export const LearningModulesSection = () => {
                   {module.badge}
                 </Badge>
               </div>
-              <CardTitle className='mt-4 text-xl tracking-tight'>
+              <CardTitle className='mt-4 text-xl tracking-tight dark:text-slate-100'>
                 {module.title}
               </CardTitle>
-              <CardDescription className='text-slate-600'>
+              <CardDescription className='text-slate-600 dark:text-slate-400'>
                 {module.description}
               </CardDescription>
             </CardHeader>
@@ -122,19 +139,25 @@ export const LearningModulesSection = () => {
                   <div
                     className={`h-2 w-2 rounded-full bg-linear-to-r ${module.color}`}
                   />
-                  <span className='text-slate-700'>Interactive examples</span>
+                  <span className='text-slate-700 dark:text-slate-300'>
+                    Interactive examples
+                  </span>
                 </div>
                 <div className='flex items-center gap-2.5'>
                   <div
                     className={`h-2 w-2 rounded-full bg-linear-to-r ${module.color}`}
                   />
-                  <span className='text-slate-700'>Best practices</span>
+                  <span className='text-slate-700 dark:text-slate-300'>
+                    Best practices
+                  </span>
                 </div>
                 <div className='flex items-center gap-2.5'>
                   <div
                     className={`h-2 w-2 rounded-full bg-linear-to-r ${module.color}`}
                   />
-                  <span className='text-slate-700'>Real-world patterns</span>
+                  <span className='text-slate-700 dark:text-slate-300'>
+                    Real-world patterns
+                  </span>
                 </div>
               </div>
             </CardContent>

@@ -35,7 +35,8 @@ export default function InputOTPPage() {
     }
   };
 
-  /** * Triggers when all digits are filled.
+  /**
+   * Triggers when all digits are filled.
    * Removes focus from the input for a cleaner UX.
    */
   const handleComplete = () => {
@@ -45,12 +46,14 @@ export default function InputOTPPage() {
   };
 
   return (
-    <div className='max-w-md border rounded-xl space-y-8 p-2 sm:p-6 bg-white'>
+    <div className='max-w-md border dark:border-slate-800 rounded-xl space-y-8 p-2 sm:p-6 bg-white dark:bg-slate-950 transition-colors'>
       {/* Main OTP section */}
       <div className='flex flex-col items-center space-y-6 text-center'>
         <div className='space-y-2'>
-          <h1 className='text-2xl font-semibold tracking-tight'>Verify your account</h1>
-          <p className='text-xs text-slate-500'>
+          <h1 className='text-2xl font-semibold tracking-tight dark:text-slate-50'>
+            Verify your account
+          </h1>
+          <p className='text-xs text-slate-500 dark:text-slate-400'>
             We&#39;ve sent a 6-digit verification code to your registered email address.
           </p>
         </div>
@@ -67,12 +70,16 @@ export default function InputOTPPage() {
             onChange={val => setValue(val)}
             onComplete={handleComplete}
           >
-            <InputOTPGroup>
+            <InputOTPGroup className='dark:text-slate-200'>
               {[...Array(6)].map((_, i) => (
                 <InputOTPSlot
                   key={i}
                   index={i}
-                  className={isInvalid ? 'border-red-500 text-red-600' : ''}
+                  className={
+                    isInvalid
+                      ? 'border-red-500 text-red-600 dark:text-red-500 dark:border-red-500/50'
+                      : 'dark:border-slate-800'
+                  }
                 />
               ))}
             </InputOTPGroup>
@@ -84,7 +91,9 @@ export default function InputOTPPage() {
           {value.length === 6 ? (
             <p
               className={`text-xs font-medium flex items-center gap-1 transition-all ${
-                isInvalid ? 'text-red-600' : 'text-emerald-600'
+                isInvalid
+                  ? 'text-red-600 dark:text-red-400'
+                  : 'text-emerald-600 dark:text-emerald-400'
               }`}
             >
               {isInvalid ? (
@@ -98,7 +107,7 @@ export default function InputOTPPage() {
               )}
             </p>
           ) : (
-            <p className='text-xs text-slate-400 opacity-80'>
+            <p className='text-xs text-slate-400 dark:text-slate-500 opacity-80'>
               Entered {value.length} of 6 digits
             </p>
           )}
@@ -107,27 +116,27 @@ export default function InputOTPPage() {
 
       <div className='relative'>
         <div className='absolute inset-0 flex items-center'>
-          <span className='w-full border-t border-slate-200' />
+          <span className='w-full border-t border-slate-200 dark:border-slate-800' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-white px-2 text-slate-400 font-medium'>
+          <span className='bg-white dark:bg-slate-950 px-2 text-slate-400 dark:text-slate-500 font-medium'>
             Developer Tools
           </span>
         </div>
       </div>
 
       {/* Utility section */}
-      <div className='space-y-4 rounded-2xl border border-slate-200 bg-slate-50/50 p-5 shadow-sm'>
+      <div className='space-y-4 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30 p-5 shadow-sm'>
         <div className='flex items-center justify-between'>
           <div className='flex items-center gap-2'>
-            <Info className='h-4 w-4 text-blue-500' />
-            <Label className='text-sm font-semibold text-slate-700'>
+            <Info className='h-4 w-4 text-blue-500 dark:text-blue-400' />
+            <Label className='text-sm font-semibold text-slate-700 dark:text-slate-300'>
               Mock verification code
             </Label>
           </div>
         </div>
 
-        <p className='text-xs text-slate-500 leading-relaxed'>
+        <p className='text-xs text-slate-500 dark:text-slate-400 leading-relaxed'>
           Need a code to test the flow? Use the one below to bypass the actual SMTP/SMS
           service.
         </p>
@@ -138,7 +147,7 @@ export default function InputOTPPage() {
               id='demo-code'
               value={demoCode}
               readOnly
-              className='bg-white font-mono text-sm tracking-[0.3em] focus-visible:ring-0 border-slate-200 pr-10'
+              className='bg-white dark:bg-slate-900 font-mono text-sm tracking-[0.3em] focus-visible:ring-0 border-slate-200 dark:border-slate-800 dark:text-slate-300 pr-10'
             />
           </div>
 
@@ -146,14 +155,14 @@ export default function InputOTPPage() {
             type='button'
             size='icon'
             variant='outline'
-            className='h-9 w-9 shrink-0 transition-all'
+            className='h-9 w-9 shrink-0 transition-all dark:border-slate-800 dark:hover:bg-slate-800'
             onClick={copyToClipboard}
           >
             <span className='sr-only'>Copy</span>
             {hasCopied ? (
-              <Check className='h-4 w-4 text-emerald-600 animate-in fade-in zoom-in duration-300' />
+              <Check className='h-4 w-4 text-emerald-600 dark:text-emerald-400 animate-in fade-in zoom-in duration-300' />
             ) : (
-              <Copy className='h-4 w-4 animate-in fade-in zoom-in duration-300' />
+              <Copy className='h-4 w-4 dark:text-slate-400 animate-in fade-in zoom-in duration-300' />
             )}
           </Button>
         </div>
@@ -162,7 +171,7 @@ export default function InputOTPPage() {
       <div className='text-center'>
         <Button
           variant='link'
-          className='text-xs text-slate-500 hover:text-blue-600'
+          className='text-xs text-slate-500 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400'
           onClick={generateRandomCode}
         >
           Didn&#39;t receive a code? Resend

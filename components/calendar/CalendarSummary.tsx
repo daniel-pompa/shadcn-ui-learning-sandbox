@@ -3,6 +3,7 @@ import { CalendarIcon } from 'lucide-react';
 import { CalendarState, RestrictionType } from '@/types/calendar';
 import { formatDate, formatMultipleDates, getMultiDateDetails } from '@/lib/date-utils';
 import { getCalendarRestrictionDetails } from '@/constants/calendar';
+import { cn } from '@/lib/utils';
 
 interface CalendarSummaryProps {
   calendars: CalendarState[];
@@ -18,10 +19,10 @@ export const CalendarSummary = ({
   multipleCalendarRestriction,
 }: CalendarSummaryProps) => {
   return (
-    <Card>
+    <Card className='dark:bg-slate-950 dark:border-slate-800'>
       <CardHeader>
-        <CardTitle className='flex items-center gap-2'>
-          <CalendarIcon className='h-5 w-5' />
+        <CardTitle className='flex items-center gap-2 dark:text-slate-100'>
+          <CalendarIcon className='h-5 w-5 text-blue-600 dark:text-blue-400' />
           Calendar selection summary
         </CardTitle>
       </CardHeader>
@@ -39,10 +40,15 @@ export const CalendarSummary = ({
         </div>
 
         {/* Clear all button */}
-        <div className='mt-8 pt-6 border-t flex justify-center'>
+        <div className='mt-8 pt-6 border-t dark:border-slate-800 flex justify-center'>
           <button
             onClick={onClearAll}
-            className='px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors duration-200'
+            className={cn(
+              'px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200',
+              hasSelectedDates
+                ? 'text-gray-700 bg-gray-100 hover:bg-gray-200 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700'
+                : 'text-gray-400 bg-gray-50 cursor-not-allowed dark:bg-slate-900 dark:text-slate-600'
+            )}
             disabled={!hasSelectedDates}
           >
             Clear All Selections
@@ -76,40 +82,56 @@ function CalendarSummaryItem({
   }
 
   return (
-    <div key={calendar.id} className='space-y-3 p-4 border rounded-lg'>
+    <div
+      key={calendar.id}
+      className='space-y-3 p-4 border rounded-lg dark:border-slate-800 dark:bg-slate-900/30'
+    >
       <div className='flex items-center justify-between'>
-        <h3 className='font-semibold'>{calendar.title}</h3>
+        <h3 className='font-semibold text-sm dark:text-slate-200'>{calendar.title}</h3>
         <div className='flex items-center gap-2'>
           {dateCount > 0 && (
-            <span className='text-xs font-medium bg-gray-100 px-2 py-1 rounded'>
+            <span className='text-[10px] font-bold uppercase tracking-wider bg-gray-100 dark:bg-slate-800 text-gray-600 dark:text-slate-400 px-2 py-0.5 rounded shadow-sm'>
               {dateCount} {calendar.mode === 'multiple' ? 'dates' : 'date'}
             </span>
           )}
           <div
-            className={`h-3 w-3 rounded-full ${
-              dateCount > 0 ? 'bg-green-500' : 'bg-gray-300'
-            }`}
+            className={cn(
+              'h-2.5 w-2.5 rounded-full transition-colors',
+              dateCount > 0
+                ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]'
+                : 'bg-gray-300 dark:bg-slate-700'
+            )}
           />
         </div>
       </div>
 
       <div>
-        <p className='text-sm text-gray-500 mb-1'>
+        <p className='text-xs text-gray-500 dark:text-gray-400 mb-1'>
           Selected date{calendar.mode === 'multiple' ? 's' : ''}:
         </p>
-        <p className={`font-medium ${dateCount > 0 ? 'text-gray-900' : 'text-gray-400'}`}>
+        <p
+          className={cn(
+            'font-medium text-sm leading-snug',
+            dateCount > 0
+              ? 'text-gray-900 dark:text-slate-100'
+              : 'text-gray-400 dark:text-slate-600'
+          )}
+        >
           {dateDisplay}
         </p>
       </div>
 
-      <div className='pt-2 border-t'>
-        <p className='text-xs text-gray-500'>Mode and restrictions:</p>
-        <ul className='text-xs text-gray-600 mt-1 space-y-1'>
-          <li className='flex items-center gap-1'>
+      <div className='pt-2 border-t dark:border-slate-800'>
+        <p className='text-[10px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-tighter'>
+          Mode and restrictions:
+        </p>
+        <ul className='text-xs text-gray-600 dark:text-gray-400 mt-1.5 space-y-1'>
+          <li className='flex items-center gap-1.5'>
             <div
-              className={`h-1.5 w-1.5 rounded-full ${
+              className={cn(
+                'h-1.5 w-1.5 rounded-full',
                 calendar.mode === 'multiple' ? 'bg-indigo-400' : 'bg-blue-400'
-              }`}
+              )}
             />
             <span className='font-medium'>
               {calendar.mode === 'multiple' ? 'Multi-select' : 'Single-select'}
@@ -117,13 +139,14 @@ function CalendarSummaryItem({
           </li>
           {getCalendarRestrictionDetails(calendar.id, multipleCalendarRestriction).map(
             (restriction, index) => (
-              <li key={index} className='flex items-center gap-1'>
+              <li key={index} className='flex items-center gap-1.5'>
                 <div
-                  className={`h-1.5 w-1.5 rounded-full ${
+                  className={cn(
+                    'h-1.5 w-1.5 rounded-full',
                     restriction.type === 'disabled' ? 'bg-red-400' : 'bg-green-400'
-                  }`}
+                  )}
                 />
-                {restriction.text}
+                <span className='truncate'>{restriction.text}</span>
               </li>
             )
           )}

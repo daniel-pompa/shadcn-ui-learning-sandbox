@@ -31,21 +31,24 @@ const SheetBody = ({ title, side }: { title: string; side: string }) => (
         </div>
         <SheetTitle>{title}</SheetTitle>
       </div>
-      <SheetDescription>
+      <SheetDescription className='dark:text-slate-400'>
         Configure your workspace preferences for the {side} orientation. All changes are
         synchronized in real-time.
       </SheetDescription>
     </SheetHeader>
 
-    <div className='grid gap-4 py-8 border-y my-6 border-slate-100'>
-      <div className='text-sm text-slate-400 italic text-center'>
+    <div className='grid gap-4 py-8 border-y my-6 border-slate-100 dark:border-slate-800'>
+      <div className='text-sm text-slate-400 dark:text-slate-500 italic text-center'>
         Content area for {side} panel
       </div>
     </div>
 
     <SheetFooter className='mt-auto grid grid-cols-2 gap-4'>
       <SheetClose asChild>
-        <Button variant='outline' className='flex-1 sm:flex-none'>
+        <Button
+          variant='outline'
+          className='flex-1 sm:flex-none dark:border-slate-800 dark:hover:bg-slate-900'
+        >
           Cancel
         </Button>
       </SheetClose>
@@ -56,10 +59,14 @@ const SheetBody = ({ title, side }: { title: string; side: string }) => (
 
 export default function SheetDemo() {
   return (
-    <div className='flex flex-col gap-6 p-6 border rounded-2xl bg-slate-50/30'>
+    <div className='flex flex-col gap-6 p-6 border dark:border-slate-800 rounded-2xl bg-slate-50/30 dark:bg-slate-900/20'>
       <div className='space-y-1'>
-        <h2 className='text-base font-semibold text-slate-900'>Sheet layouts</h2>
-        <p className='text-sm text-slate-500'>Explore different slide-over positions.</p>
+        <h2 className='text-base font-semibold text-slate-900 dark:text-slate-100'>
+          Sheet layouts
+        </h2>
+        <p className='text-sm text-slate-500 dark:text-slate-400'>
+          Explore different slide-over positions.
+        </p>
       </div>
 
       <div className='grid grid-cols-2 lg:flex lg:flex-row gap-3'>
@@ -68,14 +75,17 @@ export default function SheetDemo() {
             <SheetTrigger asChild>
               <Button
                 variant='outline'
-                className='flex items-center justify-center gap-2 h-11 group'
+                className='flex items-center justify-center gap-2 h-11 group dark:border-slate-800 dark:hover:bg-slate-900 transition-all'
               >
                 <Icon className='h-4 w-4 text-slate-400 group-hover:text-primary transition-colors' />
-                <span className='text-xs font-medium'>{label}</span>
+                <span className='text-xs font-medium dark:text-slate-300'>{label}</span>
               </Button>
             </SheetTrigger>
 
-            <SheetContent side={side} className='flex flex-col w-full sm:max-w-md'>
+            <SheetContent
+              side={side}
+              className='flex flex-col w-full sm:max-w-md dark:bg-slate-950 dark:border-slate-800'
+            >
               <SheetBody title={label} side={side} />
             </SheetContent>
           </Sheet>

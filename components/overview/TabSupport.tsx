@@ -55,11 +55,6 @@ export const TabSupport = () => {
       answer:
         'Yes, you can cancel your subscription at any time from the billing area in your profile.',
     },
-    {
-      question: 'What is the rate limit for requests?',
-      answer:
-        'The standard plan allows up to 1,000 requests per minute. Enterprise limits are custom.',
-    },
   ];
 
   // Handlers for support actions
@@ -83,48 +78,51 @@ export const TabSupport = () => {
   };
 
   return (
-    <TabsContent value='help' className='space-y-6 animate-in fade-in-50 duration-500'>
+    <TabsContent
+      value='help'
+      className='space-y-6 animate-in fade-in-50 duration-500 transition-colors'
+    >
       <div className='grid grid-cols-1 lg:grid-cols-3 gap-6'>
         {/* Help resources and documentation */}
         <div className='space-y-6'>
-          <Card className='shadow-sm border-primary/10 bg-primary/2'>
+          <Card className='shadow-sm border-primary/10 bg-primary/5 dark:bg-primary/10 dark:border-primary/20'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-2'>
+              <CardTitle className='flex items-center gap-2 dark:text-slate-100'>
                 <BookOpen className='h-4 w-4 text-primary' />
                 Learning resources
               </CardTitle>
-              <CardDescription>
+              <CardDescription className='dark:text-slate-400'>
                 Deep dive into our guides and technical specs.
               </CardDescription>
             </CardHeader>
             <CardContent className='space-y-4'>
               <div
-                className='group cursor-pointer p-3 rounded-lg border bg-background hover:border-primary/50 transition-all'
+                className='group cursor-pointer p-3 rounded-lg border bg-background dark:bg-slate-950 dark:border-slate-800 hover:border-primary/50 transition-all'
                 onClick={handleOpenDocs}
               >
-                <p className='text-sm flex items-center justify-between'>
+                <p className='text-sm flex items-center justify-between dark:text-slate-200'>
                   Quick start guide{' '}
                   <ExternalLink className='h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity' />
                 </p>
-                <p className='text-xs text-muted-foreground mt-1'>
+                <p className='text-xs text-muted-foreground dark:text-slate-500 mt-1'>
                   Get up and running in less than 5 minutes.
                 </p>
               </div>
               <div
-                className='group cursor-pointer p-3 rounded-lg border bg-background hover:border-primary/50 transition-all'
+                className='group cursor-pointer p-3 rounded-lg border bg-background dark:bg-slate-950 dark:border-slate-800 hover:border-primary/50 transition-all'
                 onClick={handleOpenDocs}
               >
-                <p className='text-sm flex items-center justify-between'>
+                <p className='text-sm flex items-center justify-between dark:text-slate-200'>
                   Api reference{' '}
                   <ExternalLink className='h-3 w-3 opacity-0 group-hover:opacity-100 transition-opacity' />
                 </p>
-                <p className='text-xs text-muted-foreground mt-1'>
+                <p className='text-xs text-muted-foreground dark:text-slate-500 mt-1'>
                   Detailed endpoint documentation and schemas.
                 </p>
               </div>
               <Button
                 variant='outline'
-                className='w-full text-xs'
+                className='w-full text-xs dark:border-slate-800 dark:hover:bg-slate-900'
                 onClick={handleOpenDocs}
               >
                 View all documentation
@@ -133,43 +131,49 @@ export const TabSupport = () => {
           </Card>
 
           {/* System status card */}
-          <Card className='shadow-sm'>
+          <Card className='shadow-sm dark:border-slate-800 dark:bg-slate-950/50'>
             <CardHeader className='pb-3'>
-              <CardTitle className='text-sm flex items-center gap-2'>
+              <CardTitle className='text-sm flex items-center gap-2 dark:text-slate-100'>
                 <Server className='h-4 w-4' />
                 System status
               </CardTitle>
             </CardHeader>
             <CardContent className='space-y-4'>
               <div className='flex items-center justify-between'>
-                <span className='text-xs text-muted-foreground'>Global api</span>
+                <span className='text-xs text-muted-foreground dark:text-slate-400'>
+                  Global api
+                </span>
                 <Badge
                   variant='outline'
-                  className='bg-emerald-500/10 text-emerald-600 border-emerald-500/20 text-[10px]'
+                  className='bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 dark:border-emerald-500/30 text-[10px]'
                 >
                   Operational
                 </Badge>
               </div>
               <div className='flex items-center justify-between'>
-                <span className='text-xs text-muted-foreground'>Web dashboard</span>
+                <span className='text-xs text-muted-foreground dark:text-slate-400'>
+                  Web dashboard
+                </span>
                 <Badge
                   variant='outline'
-                  className='bg-emerald-500/10 text-emerald-600 border-emerald-500/20 text-[10px]'
+                  className='bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20 dark:border-emerald-500/30 text-[10px]'
                 >
                   Operational
                 </Badge>
               </div>
               <div className='flex items-center justify-between'>
-                <span className='text-xs text-muted-foreground'>Job queues</span>
+                <span className='text-xs text-muted-foreground dark:text-slate-400'>
+                  Job queues
+                </span>
                 <Badge
                   variant='outline'
-                  className='bg-amber-500/10 text-amber-600 border-amber-500/20 text-[10px]'
+                  className='bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20 dark:border-amber-500/30 text-[10px]'
                 >
                   High load
                 </Badge>
               </div>
               <Separator />
-              <div className='flex items-center gap-2 text-[10px] text-muted-foreground'>
+              <div className='flex items-center gap-2 text-[10px] text-muted-foreground dark:text-slate-500'>
                 <Zap className='h-3 w-3 text-amber-500' />
                 Last incident reported 4 days ago.
               </div>
@@ -178,13 +182,15 @@ export const TabSupport = () => {
         </div>
 
         {/* FAQ Section */}
-        <Card className='shadow-sm pt-0'>
-          <CardHeader className='border-b bg-muted/30 py-5'>
+        <Card className='shadow-sm pt-0 dark:border-slate-800 dark:bg-slate-950/50'>
+          <CardHeader className='border-b dark:border-slate-800 bg-muted/30 py-5'>
             <div className='flex items-center gap-2'>
-              <ShieldCheck className='h-5 w-5' />
+              <ShieldCheck className='h-5 w-5 dark:text-slate-200' />
               <div>
-                <CardTitle>Common questions</CardTitle>
-                <CardDescription>Quick answers for fast troubleshooting.</CardDescription>
+                <CardTitle className='dark:text-slate-100'>Common questions</CardTitle>
+                <CardDescription className='dark:text-slate-400'>
+                  Quick answers for fast troubleshooting.
+                </CardDescription>
               </div>
             </div>
           </CardHeader>
@@ -192,10 +198,10 @@ export const TabSupport = () => {
             <Accordion type='single' collapsible className='w-full'>
               {faqs.map((faq, index) => (
                 <AccordionItem key={index} value={`item-${index}`} className='border-b-0'>
-                  <AccordionTrigger className='text-sm hover:no-underline py-4 text-left'>
+                  <AccordionTrigger className='text-sm hover:no-underline py-4 text-left dark:text-slate-300 dark:hover:text-slate-100'>
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className='text-muted-foreground text-xs leading-relaxed'>
+                  <AccordionContent className='text-muted-foreground dark:text-slate-400 text-xs leading-relaxed'>
                     {faq.answer}
                   </AccordionContent>
                   <Separator />
@@ -207,46 +213,48 @@ export const TabSupport = () => {
 
         {/* Contact support */}
         <div className='space-y-6'>
-          <Card className='shadow-sm border-blue-100 bg-blue-50/20'>
+          <Card className='shadow-sm border-blue-100 dark:border-blue-900/40 bg-blue-50/20 dark:bg-blue-950/10'>
             <CardHeader>
-              <CardTitle className='flex items-center gap-2'>
+              <CardTitle className='flex items-center gap-2 dark:text-slate-100'>
                 <LifeBuoy className='h-5 w-5' />
                 Direct assistance
               </CardTitle>
-              <CardDescription className='text-sm'>
+              <CardDescription className='text-sm dark:text-slate-400'>
                 Our dedicated support team is ready to help you with technical
                 difficulties.
               </CardDescription>
             </CardHeader>
-            <CardContent className='flex space-y-3 gap-4'>
+            <CardContent className='flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:gap-4'>
               <Button
-                className='flex-1 bg-blue-600 hover:bg-blue-700 text-sm'
+                className='flex-1 bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500 text-sm'
                 onClick={handleLiveChat}
               >
                 <MessageCircle className='h-4 w-4' /> Start live chat
               </Button>
               <Button
                 variant='outline'
-                className='flex-1 text-sm bg-background'
+                className='flex-1 text-sm bg-background dark:bg-slate-950 dark:border-slate-800 dark:hover:bg-slate-900'
                 onClick={handleEmailSupport}
               >
-                <Mail className='h-4 w-4' /> Open support ticket
+                <Mail className='h-4 w-4' /> Ticket
               </Button>
             </CardContent>
           </Card>
 
-          <Card className='shadow-sm pt-0'>
-            <CardHeader className='border-b bg-muted/30 py-5'>
-              <CardTitle className='text-sm'>Community forum</CardTitle>
+          <Card className='shadow-sm pt-0 dark:border-slate-800 dark:bg-slate-950/50'>
+            <CardHeader className='border-b dark:border-slate-800 bg-muted/30 py-5'>
+              <CardTitle className='text-sm dark:text-slate-100'>
+                Community forum
+              </CardTitle>
             </CardHeader>
-            <CardContent>
-              <p className='text-sm text-muted-foreground mb-4'>
+            <CardContent className='pt-5'>
+              <p className='text-sm text-muted-foreground dark:text-slate-400 mb-4'>
                 Join our developer community to share tips and get help from other
                 experts.
               </p>
               <Button
                 variant='outline'
-                className='group'
+                className='group dark:border-slate-800 dark:hover:bg-slate-900'
                 onClick={() => toast('Redirecting to forum')}
               >
                 Visit community
@@ -260,4 +268,4 @@ export const TabSupport = () => {
   );
 };
 
-const Separator = () => <div className='h-px bg-border w-full my-1' />;
+const Separator = () => <div className='h-px bg-border dark:bg-slate-800 w-full my-1' />;
